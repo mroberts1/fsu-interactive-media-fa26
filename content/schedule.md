@@ -26,7 +26,6 @@ See [[agendas/w1-intro|W1 Introduction]].
 **Hyperfiction**
 
 - Nick Montfort, "[Zork and other Mainframe Works](pdf/nick-montfort-zork.pdf)" (*Twisty Little Passages*, ch. 4)
-- TWINE
 
 ---
 
@@ -34,13 +33,7 @@ See [[agendas/w1-intro|W1 Introduction]].
 
 **Chatbots: A Brief History**
 
-Sherry Turkle, excerpts from chs. 3-4 of [*Life on the Screen*](pdf/sherry-turkle-life-screen.pdf):
-
-- "The Turing Test"
-- "Julia"
-- "The Loebner Contest and Believable AI"
-- "The New Pygmalions"
-- "The Late 1970s-Mid 1980s: From Resistance to a Lessening of Anxiety"
+- Sarah Ciston et al., *Inventing ELIZA: How The First Chatbot Shaped the Future of AI* (chs. TBA)
 
 **Interactions Panel 1**
 
@@ -74,8 +67,6 @@ Sherry Turkle, excerpts from chs. 3-4 of [*Life on the Screen*](pdf/sherry-turkl
 
 **Second Lives**
 
-[Videos: Chinese gold farmers (3)](yt-library#week-7-second-lives)
-
 - "[Double Agents](https://www.nytimes.com/slideshow/2007/06/15/magazine/20070617_AVATAR_SLIDESHOW_index.html)" (*New York Times*, 15 June 2007)
 - Thomas Malaby, *Making Virtual Worlds: Linden Labs and Second Life*:
     - "[The Product: Second Life, Capital, and the Possibility of Failure in a Virtual World](pdf/malaby-second-life-ch1.pdf)" (ch. 1)
@@ -83,7 +74,6 @@ Sherry Turkle, excerpts from chs. 3-4 of [*Life on the Screen*](pdf/sherry-turkl
     - "[References](pdf/malaby-second-life-references.pdf)"
 - [Second Life](https://www.secondlife.com/) (try setting up an account!)
 - [*LIFE 2.0*](https://drive.google.com/file/d/1yGMe4qI1jQ4aGn_5epNQsXPUYku-rC7A/view?usp=sharing) (documentary about *Second Life*)
-- Julian Dibbell, "The Life of the Chinese Gold Farmer" (*New York Times*, 17 June 2007)
 
 ---
 
@@ -101,7 +91,7 @@ Sherry Turkle, excerpts from chs. 3-4 of [*Life on the Screen*](pdf/sherry-turkl
 
 ## Week 9 | F 10/30
 
-**Hyperrealism vs. Playability**
+**Virtual Psychogeography**
 
 [Videos: *Cyberpunk 2077* (2)](yt-library#week-9-hyperrealism-vs-playability)
 
@@ -111,6 +101,7 @@ Sherry Turkle, excerpts from chs. 3-4 of [*Life on the Screen*](pdf/sherry-turkl
 - Alexandra Sakellariou, "[RDR2 Prioritizes Realism At The Expense of Playability](https://screenrant.com/red-dead-redemption-2-realism-extreme-boring-controls/)" (*Screen Rant*, 7 September 2020)
 - [*Cyberpunk 2077*](https://www.nexusmods.com/games/cyberpunk2077) (*Nexus Mods*)
 - [*Cyberpunk 2077* YouTube playlist](https://youtube.com/playlist?list=PLKJL7wxYKW3MbT-x6mf5Yln8a7LUnS4jm&si=S5dfWP2b7tEXOTu6)
+- inZOI
 
 **Interactions Panel 3**
 
@@ -118,9 +109,11 @@ Sherry Turkle, excerpts from chs. 3-4 of [*Life on the Screen*](pdf/sherry-turkl
 
 ## Week 10 | F 11/06
 
-**Interpassive Aggressive**
+**Generative Worlds
 
-Robert Pfaller, "[Introduction: Interpassivity Today](pdf/interpassivity-intro.pdf)"
+- Fei Fei Li, "[From Words to Worlds: Spatial Intelligence is AI’s Next Frontier](https://drfeifei.substack.com/p/from-words-to-worlds-spatial-intelligence)" (World Labs, 10 November 2025)
+- "[Marble: A Multimodal World Model](https://www.worldlabs.ai/blog/marble-world-model)" (World Labs, 12 November 2025)
+- "[3D As Code](https://www.worldlabs.ai/blog/3d-as-code)" (World Labs, 3 March 2026)
 
 **Interactions Panel 4**
 
@@ -128,9 +121,10 @@ Robert Pfaller, "[Introduction: Interpassivity Today](pdf/interpassivity-intro.p
 
 ## Week 11 | F 11/13
 
-**Tap, Pinch, Swipe: Touchscreens**
+**Photorealistic Worlds**
 
-Michele White, selected chs. from *Touch Screen Theory*
+- "[Atlas: A World Model for Spatial Intelligence](https://www.worldlabs.ai/blog/atlas)" (World Labs, 1 September 2026)
+- "[A Functional Taxonomy of World Models](https://www.worldlabs.ai/blog/taxonomy-of-world-models)" (World Labs, 3 June 2026)
 
 **Interactions Panel 5**
 
@@ -138,7 +132,7 @@ Michele White, selected chs. from *Touch Screen Theory*
 
 ## Week 12 | F 11/20
 
-**Audioreactive: Generative Interactivity**
+**Audioreactivity**
 
 DayDream and other generative tools
 
@@ -162,7 +156,8 @@ SIG Presentations
 
 ## Week 15 | F 12/11
 
-Last class meeting.
+SIG Presentations
 
-M 12/14 Reading Day\
+M 12/14 Reading Day
+
 T 12/15-21 Exam period (T 12/22 snow day)

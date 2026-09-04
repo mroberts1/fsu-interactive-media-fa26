@@ -27,23 +27,6 @@ See [[schedule|Week 6]].
 
 *Myst* (2021) launch trailer (Cyan)
 
-## Week 7: Second Lives
-
-Julian Dibbell's "The Life of the Chinese Gold Farmer" in three parts. See
-[[schedule|Week 7]].
-
-![](https://www.youtube.com/watch?v=q3cmCKjPLR8)
-
-Gold farmers, part 1
-
-![](https://www.youtube.com/watch?v=3rezLLMhwSM)
-
-Gold farmers, part 2
-
-![](https://www.youtube.com/watch?v=kCXZNA74iIo)
-
-Gold farmers, part 3
-
 ## Week 9: Hyperrealism vs. Playability
 
 *Cyberpunk 2077* as ambience and as a modding platform. See
