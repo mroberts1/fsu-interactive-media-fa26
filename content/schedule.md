@@ -109,7 +109,7 @@ See [[agendas/w1-intro|W1 Introduction]].
 
 ## Week 10 | F 11/06
 
-**Generative Worlds
+**Generative Worlds**
 
 - Fei Fei Li, "[From Words to Worlds: Spatial Intelligence is AI’s Next Frontier](https://drfeifei.substack.com/p/from-words-to-worlds-spatial-intelligence)" (World Labs, 10 November 2025)
 - "[Marble: A Multimodal World Model](https://www.worldlabs.ai/blog/marble-world-model)" (World Labs, 12 November 2025)
