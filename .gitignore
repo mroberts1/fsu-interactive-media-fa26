@@ -17,3 +17,7 @@ public/
 # Course reading PDFs. Large (79MB) and mostly not ours to redistribute;
 # kept locally and out of the published repo for now.
 *.pdf
+
+# Exceptions: the two Montfort chapters linked from the schedule.
+!content/pdf/nick-montfort-adventure.pdf
+!content/pdf/nick-montfort-zork.pdf
