@@ -318,8 +318,7 @@ still reaches the page through the `og:site_name` meta tag.
 
 ## Deployment
 
-No GitHub remote exists yet. The workflow is in place and will publish to
-GitHub Pages from `main` once the repo is pushed, via `.github/workflows/deploy.yml`:
+The site publishes to GitHub Pages from `main` via `.github/workflows/deploy.yml`:
 `npm ci` in `.quartz/`, then the same build command as `build.sh`, then
 `upload-pages-artifact` on `public/`. Pushing to `main` is the whole deploy
 step; there is nothing to run locally first.
@@ -327,8 +326,36 @@ step; there is nothing to run locally first.
 Because a push is a deploy, do not commit or push while iterating. Work
 locally against `./dev.sh` and let the user decide when to publish.
 
-Intended to live at https://mroberts1.github.io/fsu-interactive-media-fa26/ once the
-repo is pushed. It has not been pushed to GitHub yet, so no deploy has run.
+Live at https://mroberts1.github.io/fsu-interactive-media-fa26/
+Repo: https://github.com/mroberts1/fsu-interactive-media-fa26 (public)
+
+## What is deliberately not published
+
+The repo's history starts at one root commit. The conversion work happened over
+seven commits that contained the Fall 2025 student roster, an office-hours Zoom
+link with its password in the query string, and 79MB of reading PDFs. Rather
+than push that and rewrite it afterwards, `main` was rebuilt as a single clean
+commit before the first push. The original seven commits survive locally on the
+`backup-pre-purge` branch, which must never be pushed.
+
+Three standing consequences:
+
+- `*.pdf` is gitignored. The PDFs stay on disk locally but are absent from the
+  repo, so eight links on `/schedule` and `/panels` 404 on the live site. That
+  is expected, not a regression. Restoring them means removing the ignore rule
+  and accepting a 79MB repo, or hosting the readings elsewhere and repointing
+  the links.
+- `content/panels.md` carries no names. Every panel reads `*TBA*`. Keep it that
+  way on the public site; a roster belongs in a private note, not here.
+- The Zoom link on `content/index.md` is the bare meeting URL. Do not paste
+  back a link with `?pwd=` in it.
+
+Before any future push, check nothing sensitive is being added:
+
+```
+git grep -nE 'pwd=|^- [A-Z][a-z]+ [A-Z][a-z]+$' main -- content
+git ls-tree -r --name-only main | grep '\.pdf$'
+```
 
 CI resolves node from `.quartz/.node-version` via `setup-node`, which installs
 `v22.16.0` on demand. Only local nodenv lacks that version, so the workaround

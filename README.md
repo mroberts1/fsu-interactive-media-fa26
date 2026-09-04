@@ -3,6 +3,10 @@
 Course site for COMM 2003, History of Interactive Media & Games, Fitchburg
 State University. An Obsidian vault published as a static site with Quartz 5.
 
+Live at https://mroberts1.github.io/fsu-interactive-media-fa26/
+
+Reading PDFs are gitignored, so the links to them 404 on the published site.
+
 Converted from the Quarto site at
 `/Volumes/Projects/Quarto/fsu-interactive-media-fa25`.
 
