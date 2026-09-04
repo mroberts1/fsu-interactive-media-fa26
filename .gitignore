@@ -1,0 +1,19 @@
+.DS_Store
+public/
+.chum-cache/
+
+# Local Obsidian app state. Contains plugin credentials and large binaries;
+# the site build does not need it.
+.obsidian/
+
+# Smart Connections plugin embeddings cache.
+.smart-env/
+
+.quartz/node_modules/
+.quartz/.quartz-cache/
+.quartz/.quartz/
+.quartz/plugins/
+
+# Course reading PDFs. Large (79MB) and mostly not ours to redistribute;
+# kept locally and out of the published repo for now.
+*.pdf

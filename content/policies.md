@@ -1,0 +1,98 @@
+---
+title: Policies
+---
+
+*Late Policy*
+
+Assignments that are late will lose 1/2 of a grade per day, beginning at the end of class and including weekends and holidays. This means that a paper, which would have received an A if it was on time, will receive a B+ the next day, B- for two days late, and so on. Time management, preparation for our meetings, and timely submission of your work comprise a significant dimension of your professionalism. As such, your work must be completed by the beginning of class on the day it is due. If you have a serious problem that makes punctual submission impossible, you must discuss this matter with me before the due date so that we can make alternative arrangements. Because you are given plenty of time to complete your work, and major due dates are given to you well in advance, last minute problems should not preclude handing in assignments on time.
+
+---
+
+**Mandatory Reporter**
+
+Fitchburg State University is committed to providing a safe learning environment for all students that is free of all forms of discrimination and harassment. Please be aware all FSU faculty members are "mandatory reporters," which means that if you tell me about a situation involving sexual harassment, sexual assault, dating violence, domestic violence, or stalking, I am legally required to share that information with the Title IX Coordinator. If you or someone you know has been impacted by sexual harassment, sexual assault, dating or domestic violence, or stalking, FSU has staff members trained to support you. If you or someone you know has been impacted by sexual harassment, sexual assault, dating or domestic violence, or stalking, please visit <http://fitchburgstate.edu/titleix> to access information about university support and resources.
+
+---
+
+**Health**
+
+[Health Services](http://www.google.com/url?q=http%3A%2F%2Fwww.fitchburgstate.edu%2Foffices-services-directory%2Fhealth-services%2F&sa=D&sntz=1&usg=AFQjCNEw5V0i0hL5DVO5b43gejNNaAt4ig)
+
+Hours: Monday-Friday 8:30AM-5PM Location: Ground Level of Russell Towers (across from the entrance of Holmes Dining Hall) Phone: (978) 665-3643/3894
+
+[Counseling Services](http://www.google.com/url?q=http%3A%2F%2Fwww.fitchburgstate.edu%2Foffices-services-directory%2Fcounseling-services%2F&sa=D&sntz=1&usg=AFQjCNEYiS4EmSvWerpp2bKr5lTpouPuqQ)
+
+The Counseling Services Office offers a range of services including individual, couples and group counseling, crisis intervention, psychoeducational programming, outreach ALTERNATIVE ECOSYSTEMSs, and community referrals. Counseling services are confidential and are offered at no charge to all enrolled students. Staff at Counseling Services are also available for consultation to faculty, staff and students. Counseling Services is located in the Hammond, 3rd Floor, Room 317.
+
+[Fitchburg Anti-Violence Education (FAVE)](http://www.google.com/url?q=http%3A%2F%2Fwww.fitchburgstate.edu%2Foffices-services-directory%2Ffitchburg-anti-violence-education%2F&sa=D&sntz=1&usg=AFQjCNFi5qy-wunMxX-hoWbA9YwT8aa4Ig)
+
+FAVE collaborates with a number of community partners (e.g., YWCA Domestic Violence Services, Pathways for Change) to meet our training needs and to link survivors with community based resources. This site also features [resources](http://www.google.com/url?q=http%3A%2F%2Fwww.fitchburgstate.edu%2Foffices-services-directory%2Ffitchburg-anti-violence-education%2Ffitchburg-anti-violence-education-resources%2F&sa=D&sntz=1&usg=AFQjCNF9KZ2O1AvPMLJTHdNg1DfmYYtgog) for help or information about dating violence, domestic violence, sexual assault and stalking. If you or someone you know is in an abusive relationship or has been a victim of sexual assault, there are many places to go for help. Many can be accessed 24 hours a day, seven days a week, 365 days a year. On campus, free and confidential support is provided at both Counseling Services and Health Services.
+
+**Community Food Pantry**  Food insecurity is a growing issue and it certainly can affect student learning. The ability to have access to nutritious food is incredibly vital. The Falcon Bazaar, located in Hammond G 15, is stocked with food, basic necessities, and can provide meal swipes to support all Fitchburg State students experiencing food insecurity for a day or a semester.
+
+The university continues to partner with Our Father's House to support student needs and access to food and services. All Fitchburg State University students are welcome at the Our Father's House Community Food Pantry. This Pantry is located at the Faith Christian Church at 40 Boutelle St., Fitchburg, MA and is open from 5-7pm. Each "household" may shop for nutritious food once per month by presenting a valid FSU ID.
+
+---
+
+**Academic Integrity**
+
+The University "Academic Integrity" policy can be found online at [http:// www.fitchburgstate.edu/offices-services-directory/office-of-student-conductmediation-education/academic-integrity/.](http://www.fitchburgstate.edu/offices-services-directory/office-of-student-conduct-mediation-education/academic-integrity/) Students are expected to do their own work. Plagiarism and cheating are inexcusable. Any instance of plagiarism or cheating will automatically result in a zero on the assignment and may be reported the Office of Student and Academic Life at the discretion of the instructor.
+
+Plagiarism includes, but is not limited to: - Using papers or work from another class. - Using another student's paper or work from any class. - Copying work or a paper from the Internet. - The egregious lack of citing sources or documenting research.
+
+*If you're not clear on what is or is not plagiarism, ASK. The BEST case scenario if caught is a zero on that assignment, and ignorance of what does or does not count is not an excuse. That being said, I'm a strong supporter of* [*Fair Use*](https://en.wikipedia.org/wiki/Fair_Use) *doctrine. Just attribute what you use--and, again, ASK if there's any doubt.*
+
+**Americans With Disabilities Act (ADA)**
+
+---
+
+If you need course adaptations or accommodations because of a disability, if you have emergency medical information to share with the instructor, or if you need special arrangements in case the building must be evacuated, please inform the faculty member as soon as possible.
+
+---
+
+**Technology**
+
+At some point during the semester you will likely have a problem with technology. Your laptop will crash; your iPad battery will die; a recording you make will disappear; you will accidentally delete a file; the wireless will go down at a crucial time. These, however, are inevitabilities of life, not emergences. Technology problems are not excuses for unfinished or late work. Bad things may happen, but you can protect yourself by doing the following:
+
+- Plan ahead: A deadline is the last minute to turn in material. You can start---and finish---early, particularly if challenging resources are required, or you know it will be time consuming to finish this project.
+
+- Save work early and often: Think how much work you do in 10 minutes. I auto save every 2 minutes.
+
+- Make regular backups of files in a different location: Between Box, Google Drive, Dropbox, and iCloud, you have ample places to store and backup your materials. Use them.
+
+- Save drafts: When editing, set aside the original and work with a copy.
+
+- Practice safe computing: On your personal devices, install and use software to control viruses and malware.
+
+---
+
+**Grading**
+
+Grading for the course will follow the FSU grading policy below:
+
+4.0: 95-100\
+3.7: 92-94\
+3.5: 89-91\
+3.3: 86-88\
+3.0: 83-85\
+2.7: 80-82\
+2.5: 77-79\
+2.3: 74-76\
+2.0: 71-73\
+0.0: \< 70
+
+---
+
+**Academic Resources**
+
+[Writing Center](http://www.fitchburgstate.edu/offices-services-directory/tutor-center/writing-help/)
+
+[Academic Policies](http://catalog.fitchburgstate.edu/content.php?catoid=13&navoid=851)
+
+[Disability Services](http://www.fitchburgstate.edu/offices-services-directory/disability-services/)
+
+[Fitchburg State Alert system for emergencies, snow closures/delays, and faculty absences](https://www.getrave.com/login/fitchburgstate/)
+
+[University Career Services](http://www.fitchburgstate.edu/offices-services-directory/career-counseling-and-advising/careerservices/)
+
+---
