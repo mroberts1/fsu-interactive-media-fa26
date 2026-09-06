@@ -1,0 +1,33 @@
+{
+  "base_url": "https://blackboard.fitchburgstate.edu",
+  "course_id": "_109741_1",
+  "site_url": "https://mroberts1.github.io/fsu-interactive-media-fa26",
+  "folder_id": "_3433065_1",
+  "link_title": "Web syllabus",
+  "pages": [
+    {
+      "source": "index",
+      "title": "COMM 2003 History of Interactive Media & Games"
+    },
+    {
+      "source": "schedule",
+      "title": "Schedule"
+    },
+    {
+      "source": "policies",
+      "title": "Policies"
+    },
+    {
+      "source": "panels",
+      "title": "Panels"
+    },
+    {
+      "source": "bibliography",
+      "title": "Bibliography"
+    },
+    {
+      "source": "yt-library",
+      "title": "Video Library"
+    }
+  ]
+}

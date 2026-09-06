@@ -59,8 +59,6 @@ conversion:
 - `index.qmd` had an empty `## Objectives` heading. It is still empty.
 - `panels.md` still lists the Fall 2025 panel rosters. Only the dates were
   rolled forward; the student names need replacing from the Fall 2026 roster.
-- The Blackboard link on `index.md` points at the Fall 2025 course shell
-  (`_106098_1`). It needs the Fall 2026 course id.
 
 ## The wi26 agenda pages
 
@@ -372,6 +370,73 @@ and reapply the local changes, which are `quartz.config.yaml`, `.node-version`,
 `.obsidian/` is gitignored. Plugin `data.json` files hold live credentials, and
 one plugin ships a 59MB binary. The site build never reads it. `.smart-env/`
 (Smart Connections embeddings) is gitignored for the same reason.
+
+## Publishing to Blackboard
+
+`script/blackboard` renders the pages listed in `blackboard.json` and pushes
+each one as a document into the course's Syllabus folder, plus an external link
+back to the Pages site. Blackboard is an output, like the Pages site and the
+PDF; the vault is the source. Editing a generated document in the Blackboard UI
+works, but the next push overwrites it.
+
+    script/blackboard pages    the content pages listed in blackboard.json
+    script/blackboard link     the "Web syllabus" external link
+    script/blackboard all      both
+    --print                    write the HTML locally, push nothing
+    --publish                  make the documents visible to students
+
+Without `--publish` documents are created unavailable, so a push can be checked
+in Blackboard before students can see it. Generated `blackboard-*.html` files
+are build artifacts and gitignored.
+
+Course id, site url, folder id and page list live in `blackboard.json`. The
+Fall 2026 shell is `_109741_1` and its Syllabus folder is `_3433065_1`. Both
+FA25 and FA26 are `ultraStatus: CLASSIC`, not Ultra, even though `/ultra/` URLs
+render them.
+
+Fitchburg does not hand instructors an API key, so auth is the logged-in
+browser session driven through `agent-browser`, the same as `script/canvas` in
+`marlboro-digital-culture`. Log in once with
+`agent-browser open --headed https://blackboard.fitchburgstate.edu`, which goes
+through Microsoft SSO. The session carries `timeout:28800`, so it lasts 8 hours:
+once per working day, not once per push.
+
+Things that cost time to find, each established by testing rather than docs:
+
+Writes need Blackboard's XSRF token as an `X-Blackboard-XSRF` header. Without it
+every write is `403 {"message":"This request is not associated with a valid
+session."}` while reads keep working, which reads like a permissions problem
+rather than a missing header. The token is the `xsrf:` field inside the
+`BbRouter` cookie, which is HttpOnly, so page JavaScript cannot reach it.
+`xsrf()` shells out to `agent-browser cookies get` and extracts only that field.
+That command prints the entire cookie jar, so never run it by hand and paste the
+output anywhere; keeping it inside the script is what lets the permission be
+`Bash(script/blackboard:*)` rather than a standing right to read every session.
+
+The Ultra SPA monkey-patches both `window.fetch` and `XMLHttpRequest`. A
+relative URL passed to fetch on an `/ultra/*` page is rewritten and comes back
+as an S3 `NoSuchKey` XML error, which looks exactly like the endpoint not
+existing. `goto_api()` parks the browser on a raw API URL first, where no SPA
+bundle is loaded and both wrappers are absent.
+
+Unlike Canvas, the REST write path does essentially no sanitising. `img`,
+`iframe`, `table`, `pre`/`code`, `section`, `div`, and `id`/`class`/`data-*`
+attributes all round-trip intact, so Quartz output needs far less rewriting
+here than Canvas needs. Pasting into Blackboard's WYSIWYG is the opposite: it
+rewrites everything, which is why the hand-built FA25 syllabus carries 135
+`<span style="font-family: helvetica...">`.
+
+Look items up by title, never by remembered id. `children()` matches on title so
+a document moved or renamed in the UI is found rather than duplicated.
+
+Font Awesome icons become text labels. The glyphs come from an `@font-face` in
+`custom.scss` that only the Pages site loads, so an `<i>` reaches Blackboard
+with no glyph and leaves an empty, unclickable link. Icons are a Pages-only
+affordance.
+
+Never generate into the Assignments folder. Those items are
+`resource/x-bb-assignment`, gradebook objects carrying student submissions, not
+content. `blackboard.json` points only at the Syllabus folder.
 
 ## Keeping this file current
 

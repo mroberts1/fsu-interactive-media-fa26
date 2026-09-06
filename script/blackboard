@@ -1,0 +1,299 @@
+#!/usr/bin/env python3
+"""Render content/*.md into Blackboard-ready HTML and push it.
+
+    script/blackboard pages     the content pages listed in blackboard.json
+    script/blackboard link      the "Web syllabus" external link
+    script/blackboard all       both
+    --print                     write the HTML locally, push nothing
+    --publish                   make the documents visible to students
+
+Blackboard is an OUTPUT, like the Pages site and the PDF. The vault is the
+source. Editing a generated document inside Blackboard means the next push
+overwrites it.
+
+Auth is your logged-in browser session, driven through agent-browser. Fitchburg
+does not hand instructors an API key, so there is no token to use. Log in first
+with
+
+    agent-browser open --headed https://blackboard.fitchburgstate.edu
+
+The session lasts 8 hours (BbRouter carries timeout:28800), so in practice this
+is once per working day, not once per push.
+
+Writes additionally need Blackboard's XSRF token, which lives in the HttpOnly
+BbRouter cookie where page JavaScript cannot reach it. `xsrf()` below reads it
+with `agent-browser cookies get` and extracts only that one field; the rest of
+the cookie jar is never printed or stored. That command needs an allow rule:
+
+    Bash(agent-browser cookies get:*)
+
+Prefer allowing this script instead -- Bash(script/blackboard:*) -- so the
+approval is "publish to Blackboard" rather than "read every session cookie".
+"""
+
+import argparse
+import base64
+import json
+import re
+import subprocess
+import sys
+import tempfile
+from pathlib import Path
+
+VAULT = Path(__file__).resolve().parent.parent
+CONFIG = VAULT / "blackboard.json"
+API = "/learn/api/public/v1"
+
+
+def build_site():
+    out = Path(tempfile.mkdtemp())
+    q = VAULT / ".quartz"
+    subprocess.run(["npm", "run", "install-plugins"], cwd=q, check=True,
+                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    subprocess.run(["node", "./quartz/bootstrap-cli.mjs", "build",
+                    "-d", "../content", "-o", str(out)], cwd=q, check=True,
+                   stdout=subprocess.DEVNULL)
+    return out
+
+
+def xsrf():
+    """Blackboard's XSRF token, from the BbRouter cookie.
+
+    Every write is 403 "This request is not associated with a valid session"
+    without it. BbRouter is HttpOnly, so document.cookie cannot see it and the
+    token has to come from the browser's own cookie jar. Only the xsrf field is
+    returned; nothing else from the jar is kept, printed or logged.
+    """
+    r = subprocess.run(["agent-browser", "cookies", "get"],
+                       capture_output=True, text=True, timeout=60)
+    m = re.search(r"BbRouter=[^\n]*?xsrf:([0-9a-fA-F-]{36})", r.stdout)
+    if not m:
+        sys.exit("no Blackboard session found. Log in first:\n"
+                 "  agent-browser open --headed <base_url>")
+    return m.group(1)
+
+
+def goto_api(cfg):
+    """Park the browser on a raw API URL before evaluating anything.
+
+    Two reasons, both of which cost time to find. fetch() needs to be on the
+    Blackboard origin or it silently talks to whatever page was last open. And
+    the Ultra SPA monkey-patches window.fetch AND XMLHttpRequest: a relative
+    URL passed to fetch on an /ultra/* page is rewritten and comes back as an
+    S3 "NoSuchKey" XML error, which reads exactly like a missing endpoint. A
+    raw API URL serves plain JSON with no SPA bundle, so both wrappers are
+    absent.
+    """
+    url = f"{cfg['base_url']}{API}/courses/{cfg['course_id']}?fields=id"
+    subprocess.run(["agent-browser", "open", url],
+                   capture_output=True, text=True, timeout=120)
+
+
+def browser_eval(js):
+    r = subprocess.run(["agent-browser", "eval", js, "--json"],
+                       capture_output=True, text=True, timeout=180)
+    if r.returncode != 0:
+        sys.exit(f"agent-browser failed:\n{r.stderr[:400]}")
+    try:
+        return json.loads(json.loads(r.stdout)["data"]["result"])
+    except Exception:
+        sys.exit(f"unexpected agent-browser output:\n{r.stdout[:400]}")
+
+
+def transform(html, cfg):
+    """Article HTML -> HTML for Blackboard.
+
+    Much lighter than the Canvas equivalent. Blackboard's REST write path does
+    essentially no sanitising, unlike pasting into its WYSIWYG: h2, p, ul/li,
+    blockquote, div, img, iframe, pre/code, table, hr, section and id/class/
+    data-* attributes all round-trip intact. So this only strips Quartz's own
+    chrome and fixes URLs.
+    """
+    m = re.search(r"<article[^>]*>(.*?)</article>", html, re.S)
+    if not m:
+        sys.exit("no <article> in the built page")
+    a = m.group(1)
+    notes = []
+
+    # Quartz chrome, not content.
+    a, n = re.subn(r'<svg[^>]*class="external-icon".*?</svg>', "", a, flags=re.S)
+    if n:
+        notes.append(f"removed {n} external-link icons")
+
+    # Quartz puts a "#" permalink beside every heading. It carries an inline
+    # SVG and points at an on-page anchor, neither of which means anything in
+    # a Blackboard document. Drop the whole <a>, not just the icon, or each
+    # heading keeps a stray empty link.
+    a, n = re.subn(r'<a role="anchor".*?</a>', "", a, flags=re.S)
+    if n:
+        notes.append(f"removed {n} heading anchor links")
+
+    # Font Awesome icons are glyphs from an @font-face in custom.scss, which
+    # only the Pages site loads. Nothing carries that stylesheet into a
+    # Blackboard document, so an <i> arrives with no glyph and leaves an empty
+    # <a> with nothing to click. Each tag names itself in aria-label, so use
+    # that as the link text. Same reasoning as script/canvas in
+    # marlboro-digital-culture; icons are a Pages-only affordance.
+    def icon_to_label(mo):
+        t = re.search(r'aria-label="([^"]+)"', mo.group(0))
+        return t.group(1) if t else ""
+
+    a, n = re.subn(r'<i\b[^>]*class="fa-[^"]*"[^>]*>\s*</i>', icon_to_label, a)
+    if n:
+        notes.append(f"replaced {n} Font Awesome icons with their labels")
+
+    # Relative URLs would resolve against blackboard.fitchburgstate.edu, so
+    # point them at the published site. Matching only "./" would miss bare
+    # relatives like "img/x.png".
+    site = cfg["site_url"].rstrip("/")
+    a, n = re.subn(r'(src|href)="(?!https?:|mailto:|data:|#|/)\.?/?([^"]+)"',
+                   rf'\1="{site}/\2"', a)
+    if n:
+        notes.append(f"absolutised {n} relative URLs")
+
+    # Quartz's wrapper div carries site styling that means nothing here.
+    a = re.sub(r'^\s*<div class="markdown-preview-view[^"]*">', "", a).rstrip()
+    if a.endswith("</div>"):
+        a = a[: -len("</div>")]
+
+    return a.strip(), notes
+
+
+def children(cfg):
+    """Existing items in the target folder, by title.
+
+    Matched on title rather than a remembered id so a document edited or moved
+    in the Blackboard UI is still found instead of being duplicated.
+    """
+    js = f"""
+(async () => {{
+  const r = await fetch({json.dumps(cfg['base_url'] + API)}
+    + '/courses/{cfg["course_id"]}/contents/{cfg["folder_id"]}/children?limit=200',
+    {{credentials:'same-origin', headers:{{Accept:'application/json'}}}});
+  if (r.status !== 200) return JSON.stringify({{error:r.status}});
+  const j = await r.json();
+  return JSON.stringify({{items:(j.results||[]).map(c => ({{id:c.id, title:c.title}}))}});
+}})()
+"""
+    res = browser_eval(js)
+    if "error" in res:
+        sys.exit(f"could not list the folder (HTTP {res['error']}). Logged in?")
+    return {c["title"]: c["id"] for c in res["items"]}
+
+
+def push_document(cfg, token, title, html, existing, publish):
+    """Create or update one document. PATCH when it is already there."""
+    b64 = base64.b64encode(html.encode()).decode()
+    hit = existing.get(title)
+    avail = "Yes" if publish else "No"
+    js = f"""
+(async () => {{
+  const body = new TextDecoder().decode(Uint8Array.from(atob({json.dumps(b64)}), c => c.charCodeAt(0)));
+  const B = {json.dumps(cfg['base_url'] + API)};
+  const H = {{'Content-Type':'application/json','Accept':'application/json',
+              'X-Blackboard-XSRF':{json.dumps(token)}}};
+  const payload = JSON.stringify({{title:{json.dumps(title)}, body: body,
+    availability:{{available:{json.dumps(avail)}}},
+    contentHandler:{{id:'resource/x-bb-document'}}}});
+  const hit = {json.dumps(hit)};
+  const r = hit
+    ? await fetch(B + '/courses/{cfg["course_id"]}/contents/' + hit,
+        {{method:'PATCH', credentials:'same-origin', headers:H, body:payload}})
+    : await fetch(B + '/courses/{cfg["course_id"]}/contents/{cfg["folder_id"]}/children',
+        {{method:'POST', credentials:'same-origin', headers:H, body:payload}});
+  const t = await r.text();
+  let id = null; try {{ id = JSON.parse(t).id; }} catch(e) {{}}
+  return JSON.stringify({{status:r.status, sent:body.length, id:id,
+                          action: hit ? 'updated' : 'created',
+                          err: r.ok ? null : t.slice(0,200)}});
+}})()
+"""
+    return browser_eval(js)
+
+
+def push_link(cfg, token, existing):
+    """The external link back to the Pages site, as FA25 had it."""
+    title = cfg["link_title"]
+    hit = existing.get(title)
+    js = f"""
+(async () => {{
+  const B = {json.dumps(cfg['base_url'] + API)};
+  const H = {{'Content-Type':'application/json','Accept':'application/json',
+              'X-Blackboard-XSRF':{json.dumps(token)}}};
+  const payload = JSON.stringify({{title:{json.dumps(title)},
+    availability:{{available:'Yes'}},
+    contentHandler:{{id:'resource/x-bb-externallink', url:{json.dumps(cfg['site_url'])}}}}});
+  const hit = {json.dumps(hit)};
+  const r = hit
+    ? await fetch(B + '/courses/{cfg["course_id"]}/contents/' + hit,
+        {{method:'PATCH', credentials:'same-origin', headers:H, body:payload}})
+    : await fetch(B + '/courses/{cfg["course_id"]}/contents/{cfg["folder_id"]}/children',
+        {{method:'POST', credentials:'same-origin', headers:H, body:payload}});
+  const t = await r.text();
+  return JSON.stringify({{status:r.status, action: hit ? 'updated' : 'created',
+                          err: r.ok ? null : t.slice(0,200)}});
+}})()
+"""
+    return browser_eval(js)
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__,
+                                 formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("target", nargs="?", default="pages",
+                    choices=["pages", "link", "all"])
+    ap.add_argument("--print", action="store_true", dest="only_print",
+                    help="write the HTML locally and push nothing")
+    ap.add_argument("--publish", action="store_true",
+                    help="make the documents visible to students")
+    args = ap.parse_args()
+
+    if not CONFIG.exists():
+        sys.exit(f"missing {CONFIG.name}")
+    cfg = json.loads(CONFIG.read_text())
+
+    out = build_site()
+    rendered = {}
+    for page in cfg["pages"]:
+        src = out / page["source"] / "index.html"
+        if not src.exists():
+            src = out / f"{page['source']}.html"
+        if not src.exists():
+            sys.exit(f"built page not found for {page['source']}")
+        html, notes = transform(src.read_text(), cfg)
+        rendered[page["title"]] = html
+        for n in notes:
+            print(f"  {page['source']}: {n}")
+
+    if args.only_print:
+        for page in cfg["pages"]:
+            dest = VAULT / f"blackboard-{page['source']}.html"
+            dest.write_text(rendered[page["title"]])
+            print(f"wrote {dest.name} ({len(rendered[page['title']])} bytes)")
+        return
+
+    goto_api(cfg)
+    token = xsrf()
+    existing = children(cfg)
+
+    if args.target in ("pages", "all"):
+        for page in cfg["pages"]:
+            res = push_document(cfg, token, page["title"],
+                                rendered[page["title"]], existing, args.publish)
+            if res["status"] not in (200, 201):
+                sys.exit(f"{page['title']}: HTTP {res['status']} {res.get('err')}")
+            print(f"{res['action']} {page['title']} ({res['sent']} bytes)")
+
+    if args.target in ("link", "all"):
+        res = push_link(cfg, token, existing)
+        if res["status"] not in (200, 201):
+            sys.exit(f"{cfg['link_title']}: HTTP {res['status']} {res.get('err')}")
+        print(f"{res['action']} {cfg['link_title']}")
+
+    if not args.publish and args.target in ("pages", "all"):
+        print("\ndocuments are hidden from students; re-run with --publish "
+              "to make them visible")
+
+
+if __name__ == "__main__":
+    main()
