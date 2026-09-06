@@ -24,5 +24,7 @@ public/
 
 # Editor state. Local settings and appearance, not site content; the same
 # reasoning that keeps .obsidian/ out.
+.antigravity/
 .cursor/
 .vscode/
+.windsurf/
