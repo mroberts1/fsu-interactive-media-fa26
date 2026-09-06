@@ -447,6 +447,23 @@ Font Awesome icons become text labels. The glyphs come from an `@font-face` in
 with no glyph and leaves an empty, unclickable link. Icons are a Pages-only
 affordance.
 
+Course availability and content availability are separate gates, and the outer
+one is easy to miss. `--publish` only sets `availability.available` on the
+documents; if the course shell itself is unavailable, students still see
+nothing. There is no button for it on any content page. It lives at Control
+Panel > Customization > Properties, a radio group named `available` with Yes /
+No / Use Term Availability:
+
+    /webapps/blackboard/execute/cp/courseProperties?dispatch=editProperties&family=cp_edit_properties&course_id=<id>
+
+The course header reads "(Course is unavailable to students)" while it is off.
+Check `availability.available` on the course via the API before concluding a
+push failed to reach anyone.
+
+Edit Mode is per user and per course, and hidden items do not appear in a
+folder listing while it is off. A folder that looks empty after a successful
+push usually means Edit Mode is off, not that the push failed.
+
 Never generate into the Assignments folder. Those items are
 `resource/x-bb-assignment`, gradebook objects carrying student submissions, not
 content. `blackboard.json` points only at the Syllabus folder.
