@@ -21,3 +21,8 @@ public/
 # Exceptions: the two Montfort chapters linked from the schedule.
 !content/pdf/nick-montfort-adventure.pdf
 !content/pdf/nick-montfort-zork.pdf
+
+# Editor state. Local settings and appearance, not site content; the same
+# reasoning that keeps .obsidian/ out.
+.cursor/
+.vscode/
