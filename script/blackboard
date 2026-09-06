@@ -156,6 +156,27 @@ def transform(html, cfg):
     if a.endswith("</div>"):
         a = a[: -len("</div>")]
 
+    # Blackboard writes no styling of its own into REST-written content, so an
+    # unstyled document renders at its small default. The hand-pasted FA25
+    # syllabus only looked right because Blackboard's editor had stamped
+    # font-family/font-size onto all 135 of its spans. One wrapper does the
+    # same job for size, which inherits: measured on a live page, p and li
+    # under this div compute to 18.67px, exactly the 14pt FA25 used.
+    #
+    # font_family is deliberately unset. Blackboard's own CSS sets a family on
+    # p/li/h2 with higher specificity, so an inherited one is ignored and the
+    # text stays Open Sans, its interface font. Overriding that would mean
+    # inline styles on every element, which is the span soup FA25 is made of.
+    # Set font_family in blackboard.json only if you accept that trade.
+    family = cfg.get("font_family", "")
+    size = cfg.get("font_size", "14pt")
+    if family or size:
+        style = "; ".join(x for x in
+                          (f"font-family: {family}" if family else "",
+                           f"font-size: {size}" if size else "") if x)
+        a = f'<div style="{style};">\n{a.strip()}\n</div>'
+        notes.append(f"wrapped in {size}" + (f" {family.split(',')[0]}" if family else ""))
+
     return a.strip(), notes
 
 

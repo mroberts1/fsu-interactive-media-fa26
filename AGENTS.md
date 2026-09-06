@@ -57,8 +57,9 @@ conversion:
   ALTERNATIVE ECOSYSTEMSs", a mangled find-and-replace in the original. Left
   verbatim.
 - `index.qmd` had an empty `## Objectives` heading. It is still empty.
-- `panels.md` still lists the Fall 2025 panel rosters. Only the dates were
-  rolled forward; the student names need replacing from the Fall 2026 roster.
+- `panels.md` has had the Fall 2025 rosters cleared: every entry reads
+  `Panel: *TBA*`, awaiting the Fall 2026 roster. Dates are already rolled
+  forward.
 
 ## The wi26 agenda pages
 
@@ -425,6 +426,18 @@ attributes all round-trip intact, so Quartz output needs far less rewriting
 here than Canvas needs. Pasting into Blackboard's WYSIWYG is the opposite: it
 rewrites everything, which is why the hand-built FA25 syllabus carries 135
 `<span style="font-family: helvetica...">`.
+
+Content written over REST arrives unstyled and renders at Blackboard's small
+default. `transform()` wraps each document in a single
+`<div style="font-size: 14pt;">`. Measured on a live page, `p` and `li` inside
+that div compute to 18.67px, exactly the 14pt the hand-pasted FA25 syllabus
+used. Size is set in `blackboard.json` as `font_size`.
+
+font-family is deliberately not set. Blackboard's own CSS puts a family on
+p/li/h2 with higher specificity, so an inherited one is ignored and text stays
+Open Sans, its interface font. A `font_family` key still works but only affects
+elements Blackboard does not style; matching FA25's helvetica would need inline
+styles on every element, which is what makes that document 135 spans long.
 
 Look items up by title, never by remembered id. `children()` matches on title so
 a document moved or renamed in the UI is found rather than duplicated.
