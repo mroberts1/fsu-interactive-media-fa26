@@ -132,9 +132,9 @@ See [[agendas/w1-intro|W1 Introduction]].
 
 ## Week 12 | F 11/20
 
-**Audioreactivity**
+**Agents**
 
-DayDream and other generative tools
+Introduction to Agentic AI - Claude Code, Hermes. etc.
 
 **Interactions Panel 6**
 

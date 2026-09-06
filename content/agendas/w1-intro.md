@@ -19,3 +19,12 @@ title: "W1 Introduction"
 > Thus interactivity implies two conscious agencies in conversation, playfully and spontaneously developing a mutual discourse, taking cues and suggestions from each other as they proceed.
 
 <small>---Sandy Stone, "Sex, Death, and Machinery" (in *The War of Desire and Technology at the Close of the Mechanical Age*): 10-11.</small>
+
+## Modalities of Interactivity
+
+- Text
+- Graphics
+- Touch
+- Gesture
+- Voice/Speech
+- Prompt (AI, text/voice)
