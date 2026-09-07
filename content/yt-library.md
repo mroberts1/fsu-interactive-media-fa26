@@ -3,8 +3,7 @@ title: YouTube Library
 description: Screening clips for the weekly agendas, collected in one place
 ---
 
-Video clips that accompany the [[schedule|Schedule]], grouped by the week they
-belong to. They live here rather than inline so the schedule stays readable.
+Video clips that accompany the [[schedule|Schedule]] are grouped by the week they belong to. They live here rather than inline so the schedule stays readable.
 
 ## Week 5: Habitat
 
