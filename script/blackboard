@@ -36,6 +36,7 @@ import base64
 import html
 import json
 import re
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -280,6 +281,178 @@ def push_link(cfg, token, existing):
     return browser_eval(js)
 
 
+# Cookies Blackboard itself needs. The browser jar also holds cookies for other
+# services reached through Blackboard (Watermark/EvaluationKIT among them), and
+# `agent-browser cookies get` reports no domains, so sending the whole jar would
+# hand one vendor another's session. Send only these.
+SESSION_COOKIES = ("BbRouter", "JSESSIONID", "AWSALB", "AWSALBCORS")
+
+
+def curl_config(token):
+    """A curl --config file carrying the session cookie and XSRF header.
+
+    The bytes cannot go through the browser. Chrome refuses an HTTPS page's
+    fetch to http://127.0.0.1 and hangs rather than erroring, even with the
+    Private Network Access opt-in headers, and one of these scans is 17.9MB so
+    passing it through the eval argument is far past ARG_MAX. curl it is, the
+    same shape as script/canvas.
+
+    A config file rather than argv: command lines are visible to every process
+    on the machine via ps, and this carries a live session. Written 0600 into a
+    temp dir the caller deletes.
+    """
+    r = subprocess.run(["agent-browser", "cookies", "get"],
+                       capture_output=True, text=True, timeout=60)
+    jar = dict(l.split("=", 1) for l in r.stdout.splitlines() if "=" in l)
+    cookie = "; ".join(f"{k}={jar[k]}" for k in SESSION_COOKIES if k in jar)
+    if "BbRouter" not in jar:
+        sys.exit("no Blackboard session found. Log in first:\n"
+                 "  agent-browser open --headed <base_url>")
+    d = Path(tempfile.mkdtemp())
+    f = d / "curlrc"
+    f.write_text(f'header = "Cookie: {cookie}"\n'
+                 f'header = "X-Blackboard-XSRF: {token}"\n')
+    f.chmod(0o600)
+    return d, f
+
+
+def upload_pdf(cfg, cfgfile, path):
+    """POST one PDF to /uploads and return the upload id Blackboard assigns."""
+    r = subprocess.run(
+        ["curl", "-sS", "--config", str(cfgfile), "-X", "POST",
+         "-F", f"file=@{path}", f"{cfg['base_url']}{API}/uploads"],
+        capture_output=True, text=True, timeout=900)
+    try:
+        return json.loads(r.stdout)
+    except Exception:
+        return {"error": (r.stdout or r.stderr)[:300]}
+
+
+def is_tracked(path):
+    """Tracked files publish to Pages; gitignored ones must live in Blackboard.
+
+    That mirrors the copyright split. Own work such as the syllabus is committed
+    and served from the public site; third-party scans are excluded from git and
+    belong behind institutional login.
+    """
+    r = subprocess.run(["git", "ls-files", "--error-unmatch", str(path)],
+                       cwd=VAULT, capture_output=True, text=True)
+    return r.returncode == 0
+
+
+def content_url(cfg, content_id):
+    """The durable, login-gated URL for a content item.
+
+    Unauthenticated this serves Blackboard's error page rather than the file,
+    so it can be linked from the public Pages site without exposing the scan.
+    """
+    return (f"{cfg['base_url']}/webapps/blackboard/execute/displayIndividualContent"
+            f"?course_id={cfg['course_id']}&content_id={content_id}")
+
+
+def attach_file(cfg, token, name, upload_id):
+    """Turn an upload id into a file content item, and report what it exposes.
+
+    An upload id is not a link. Attaching it to a content item is what puts the
+    bytes into Course Files and gives them a durable URL to reference.
+    """
+    folder = cfg.get("files_folder_id") or cfg["folder_id"]
+    js = f"""
+(async () => {{
+  const B = {json.dumps(cfg['base_url'] + API)};
+  const H = {{'Content-Type':'application/json','Accept':'application/json',
+              'X-Blackboard-XSRF':{json.dumps(token)}}};
+  const r = await fetch(B + '/courses/{cfg["course_id"]}/contents/{folder}/children', {{
+    method:'POST', credentials:'same-origin', headers:H,
+    body: JSON.stringify({{title:{json.dumps(name)},
+      availability:{{available:'Yes'}},
+      contentHandler:{{id:'resource/x-bb-file',
+                      file:{{uploadId:{json.dumps(upload_id)}}}}}}})}});
+  const t = await r.text();
+  return JSON.stringify({{status:r.status, body:t.slice(0,1500)}});
+}})()
+"""
+    return browser_eval(js)
+
+
+def existing_files(cfg):
+    """File items already in the files folder, by title."""
+    folder = cfg.get("files_folder_id") or cfg["folder_id"]
+    js = f"""
+(async () => {{
+  const r = await fetch({json.dumps(cfg['base_url'] + API)}
+    + '/courses/{cfg["course_id"]}/contents/{folder}/children?limit=200',
+    {{credentials:'same-origin', headers:{{Accept:'application/json'}}}});
+  if (r.status !== 200) return JSON.stringify({{error:r.status}});
+  const j = await r.json();
+  return JSON.stringify({{items:(j.results||[]).map(c => ({{id:c.id, title:c.title}}))}});
+}})()
+"""
+    res = browser_eval(js)
+    if "error" in res:
+        sys.exit(f"could not list the files folder (HTTP {res['error']})")
+    return {html.unescape(c["title"]): c["id"] for c in res["items"]}
+
+
+def host_pdfs(cfg):
+    """Move gitignored reading PDFs into Blackboard and relink the vault.
+
+    Gitignored PDFs never reach the Pages site, so a relative link to one 404s
+    for everyone. Uploading them here and rewriting the markdown to the
+    Blackboard URL fixes both outputs at once: the vault stays the single
+    source of truth, the Pages site links out to a login-gated file rather than
+    hosting a third-party scan, and Blackboard students get the reading.
+
+    Tracked PDFs are left alone. Those are our own work, published openly, and
+    a relative link to them is correct.
+    """
+    md = sorted(VAULT.glob("content/**/*.md"))
+    wanted = {}
+    for f in md:
+        for href in re.findall(r"\]\((?:\./)?(pdf/[^)]+\.pdf)\)", f.read_text()):
+            local = VAULT / "content" / href
+            if local.exists() and not is_tracked(local):
+                wanted.setdefault(local.name, []).append(f)
+    if not wanted:
+        print("no gitignored PDFs linked from the vault; nothing to host")
+        return
+
+    goto_api(cfg)
+    token = xsrf()
+    have = existing_files(cfg)
+    urls = {}
+    d, curlrc = curl_config(token)
+    try:
+        for name in sorted(wanted):
+            if name in have:
+                urls[name] = content_url(cfg, have[name])
+                print(f"already hosted  {name}")
+                continue
+            path = VAULT / "content" / "pdf" / name
+            mb = path.stat().st_size / 1048576
+            up = upload_pdf(cfg, curlrc, path)
+            if "id" not in up:
+                sys.exit(f"upload failed for {name}: {up}")
+            res = attach_file(cfg, token, name, up["id"])
+            if res["status"] not in (200, 201):
+                sys.exit(f"attach failed for {name}: {res}")
+            cid = json.loads(res["body"])["id"]
+            urls[name] = content_url(cfg, cid)
+            print(f"uploaded        {name} ({mb:.1f} MB) -> {cid}")
+    finally:
+        shutil.rmtree(d, ignore_errors=True)
+
+    # Rewrite the vault so both outputs use the Blackboard URL.
+    for name, files in wanted.items():
+        for f in set(files):
+            s = f.read_text()
+            s2 = re.sub(r"\]\((?:\./)?pdf/" + re.escape(name) + r"\)",
+                        "](" + urls[name] + ")", s)
+            if s2 != s:
+                f.write_text(s2)
+                print(f"relinked        {name} in {f.relative_to(VAULT)}")
+
+
 def delete_ids(cfg, token, ids):
     """Delete specific content items by id, after showing what they are.
 
@@ -313,7 +486,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("target", nargs="?", default="pages",
-                    choices=["pages", "link", "all", "delete"])
+                    choices=["pages", "link", "all", "files", "delete"])
     ap.add_argument("--print", action="store_true", dest="only_print",
                     help="write the HTML locally and push nothing")
     ap.add_argument("--publish", action="store_true",
@@ -325,6 +498,10 @@ def main():
     if not CONFIG.exists():
         sys.exit(f"missing {CONFIG.name}")
     cfg = json.loads(CONFIG.read_text())
+
+    if args.target == "files":
+        host_pdfs(cfg)
+        return
 
     if args.target == "delete":
         if not args.ids:

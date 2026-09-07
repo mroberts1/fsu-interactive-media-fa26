@@ -7,7 +7,7 @@ title: "Interactions Panels"
 **Chatbots**
 
 > [!note] Materials
-> Sherry Turkle, excerpts from chs. 3-4 of [*Life on the Screen*](pdf/sherry-turkle-life-screen.pdf)
+> Sherry Turkle, excerpts from chs. 3-4 of [*Life on the Screen*](https://blackboard.fitchburgstate.edu/webapps/blackboard/execute/displayIndividualContent?course_id=_109741_1&content_id=_3721777_1)
 
 Panel: *TBA*
 

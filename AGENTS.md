@@ -464,6 +464,45 @@ Edit Mode is per user and per course, and hidden items do not appear in a
 folder listing while it is off. A folder that looks empty after a successful
 push usually means Edit Mode is off, not that the push failed.
 
+## Reading PDFs and where they live
+
+`script/blackboard files` uploads every gitignored PDF that a vault page links
+to, attaches it as a file item in the Course Documents folder, and rewrites the
+markdown link to the Blackboard URL. Run it after adding a reading, before
+pushing pages.
+
+The split is the copyright one. Own work such as the syllabus is committed and
+served publicly from Pages, and a relative `pdf/...` link to it is correct.
+Third-party scans stay out of git, so a relative link 404s for everyone; those
+belong in Blackboard behind institutional login. `is_tracked()` decides which
+is which, so the gitignore rule is the single control.
+
+Rewriting the markdown rather than the pushed HTML is deliberate. One URL then
+serves both outputs: Blackboard students get the reading, and a visitor to the
+public Pages site gets Blackboard's login wall instead of a 404 or an exposed
+scan. The vault stays the single source of truth.
+
+The URL form is
+`/webapps/blackboard/execute/displayIndividualContent?course_id=<c>&content_id=<i>`.
+Unauthenticated it returns Blackboard's `error.jsp` with HTTP 200, not the
+file, so a 200 from curl does not mean the scan is public; check the body.
+
+Uploads go through curl, not the browser. Chrome refuses an HTTPS page's fetch
+to `http://127.0.0.1` and hangs rather than erroring, even with the Private
+Network Access opt-in headers, so a local file server does not work; and one
+scan is 17MB, far past ARG_MAX for passing bytes through an eval argument.
+`curl_config()` writes the session cookie and XSRF header to a 0600 temp file
+and passes it with `--config`, keeping a live session off the command line
+where ps would show it. Only Blackboard's own cookies are sent: the browser jar
+also holds Watermark/EvaluationKIT cookies, and `agent-browser cookies get`
+reports no domains to filter on.
+
+Uploading is two steps. `POST /uploads` returns only an upload id, which is not
+a link; attaching it to a content item with `resource/x-bb-file` is what puts
+the bytes in Course Files and yields a durable URL. Course Files was empty in
+both FA25 and FA26 before this: the previous arrangement served scans from the
+public Pages site instead.
+
 Never generate into the Assignments folder. Those items are
 `resource/x-bb-assignment`, gradebook objects carrying student submissions, not
 content. `blackboard.json` points only at the Syllabus folder.
