@@ -45,17 +45,9 @@ This course examines the history and historiography of interactive media. Studen
 
 - [*LIFE 2.0*](https://drive.google.com/file/d/1yGMe4qI1jQ4aGn_5epNQsXPUYku-rC7A/view?usp=sharing) (Jason Spingarn-Koff, 2010)
 
-## Assignments / Evaluation
-
-- **Commentary** (Blackboard or Canvas, weekly, 10 required: 100-250-word response to reading/screening assignments): 30%
-- **Interactions Panel** (in-class, from week 4; 2-3 students, 15-20 minutes, with accompanying materials, joint grade): 15%
-- **Interactions Analysis Paper** (1,000 words / 4 pages double-spaced; due one week after in-class presentation): 20%
-- **Special Interest Group (SIG) Paper** (open topic) (1,000 words, 4 pages double-spaced, not including bibliography, letter grade): 20%
-- **Special Interest Group (SIG) Presentation** (in-class): 15%
-
 ## Schedule
 
-The week-by-week reading and screening schedule is on the [[schedule|Schedule]] page. Panel assignments are on [[panels|Interactions Panels]], and the screening clips are collected in the [[yt-library|YouTube Library]].
+Assignments and grading are on the [[assignments|Assignments and Evaluation]] page. The week-by-week reading and screening schedule is on the [[schedule|Schedule]] page, and the screening clips are collected in the [[yt-library|YouTube Library]].
 
 ## Policies
 
