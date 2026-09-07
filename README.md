@@ -45,6 +45,9 @@ already taken, override it: `PORT=8081 WS_PORT=3004 ./dev.sh`.
 
 Pushing to `main` deploys; there is nothing to build locally first.
 
+How to publish a reading, push to Blackboard, and make things visible to
+students is in [PUBLISHING.md](PUBLISHING.md).
+
 Agent-facing notes, including the gotchas worth reading before debugging
 anything, are in [AGENTS.md](AGENTS.md).
 
