@@ -35,8 +35,6 @@ See [[agendas/w1-intro|W1 Introduction]].
 
 - Sarah Ciston et al., *Inventing ELIZA: How The First Chatbot Shaped the Future of AI* (chs. TBA)
 
-**Interactions Panel 1**
-
 ---
 
 ## Week 5 | F 10/02
@@ -85,8 +83,6 @@ See [[agendas/w1-intro|W1 Introduction]].
 - [Hyperallergic article](https://hyperallergic.com/749447/we-met-in-virtual-reality-review/)
 - [Hunting interview](https://immerse.news/as-organic-as-a-real-camera-an-interview-with-joe-hunting-4fd4ea28845b)
 
-**Interactions Panel 2**
-
 ---
 
 ## Week 9 | F 10/30
@@ -103,8 +99,6 @@ See [[agendas/w1-intro|W1 Introduction]].
 - [*Cyberpunk 2077* YouTube playlist](https://youtube.com/playlist?list=PLKJL7wxYKW3MbT-x6mf5Yln8a7LUnS4jm&si=S5dfWP2b7tEXOTu6)
 - inZOI
 
-**Interactions Panel 3**
-
 ---
 
 ## Week 10 | F 11/06
@@ -115,8 +109,6 @@ See [[agendas/w1-intro|W1 Introduction]].
 - "[Marble: A Multimodal World Model](https://www.worldlabs.ai/blog/marble-world-model)" (World Labs, 12 November 2025)
 - "[3D As Code](https://www.worldlabs.ai/blog/3d-as-code)" (World Labs, 3 March 2026)
 
-**Interactions Panel 4**
-
 ---
 
 ## Week 11 | F 11/13
@@ -126,8 +118,6 @@ See [[agendas/w1-intro|W1 Introduction]].
 - "[Atlas: A World Model for Spatial Intelligence](https://www.worldlabs.ai/blog/atlas)" (World Labs, 1 September 2026)
 - "[A Functional Taxonomy of World Models](https://www.worldlabs.ai/blog/taxonomy-of-world-models)" (World Labs, 3 June 2026)
 
-**Interactions Panel 5**
-
 ---
 
 ## Week 12 | F 11/20
@@ -135,8 +125,6 @@ See [[agendas/w1-intro|W1 Introduction]].
 **Agents**
 
 Introduction to Agentic AI - Claude Code, Hermes. etc.
-
-**Interactions Panel 6**
 
 ---
 
