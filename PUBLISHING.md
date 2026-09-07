@@ -79,6 +79,19 @@ Blackboard appends new items at the end, so anything recreated rather than
 updated lands at the bottom. That is why the syllabus once ended up below the
 schedule.
 
+## Checking what students actually see
+
+Blackboard hides a lot behind Edit Mode, collapsed panels and small carets, so
+looking at the screen is a poor way to tell whether something is visible. Ask
+instead:
+
+    script/blackboard status
+
+It prints course availability, the term dates, and every item in both folders
+with its position and whether a student can actually reach it. It combines both
+gates, so "visible" means genuinely reachable, not just that the item's own
+flag is set.
+
 ## Things that look broken but are not
 
 A folder that looks empty in Blackboard after a successful push usually means
@@ -95,6 +108,7 @@ if you have the id from the error.
 
 ## Commands
 
+    script/blackboard status             what students can actually see
     script/blackboard files              upload and relink gitignored PDFs
     script/blackboard all                push everything, leave it hidden
     script/blackboard all --publish      push and make visible

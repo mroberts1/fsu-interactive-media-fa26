@@ -462,6 +462,61 @@ def host_pdfs(cfg):
                 print(f"relinked        {name} in {f.relative_to(VAULT)}")
 
 
+def status(cfg):
+    """Report what students actually see, without trusting the Blackboard UI.
+
+    Blackboard hides a great deal behind Edit Mode, collapsed panels and carets,
+    so "is this visible?" is genuinely hard to answer by looking. The API does
+    not care about any of that, and answers both gates at once: whether the
+    course is open, and whether each item is available.
+    """
+    goto_api(cfg)
+    js = f"""
+(async () => {{
+  const B = {json.dumps(cfg['base_url'] + API)};
+  const g = async u => (await fetch(B + u, {{credentials:'same-origin'}})).json();
+  const c = await g('/courses/{cfg["course_id"]}');
+  let term = null;
+  if (c.termId) term = await g('/terms/' + c.termId);
+  const folders = {json.dumps([cfg["folder_id"], cfg.get("files_folder_id") or cfg["folder_id"]])};
+  const out = {{}};
+  for (const f of [...new Set(folders)]) {{
+    const j = await g('/courses/{cfg["course_id"]}/contents/' + f + '/children?limit=200');
+    out[f] = (j.results||[]).map(i => ({{p:i.position, t:i.title,
+      a:i.availability && i.availability.available,
+      h:(i.contentHandler && i.contentHandler.id || '').replace('resource/x-bb-','')}}))
+      .sort((x,y) => x.p - y.p);
+  }}
+  return JSON.stringify({{course:c.availability, term: term && {{name:term.name,
+    avail:term.availability && term.availability.available,
+    dur:term.availability && term.availability.duration}}, folders:out}});
+}})()
+"""
+    r = browser_eval(js)
+    ca = (r["course"] or {}).get("available")
+    print(f"course availability: {ca}")
+    open_now = ca == "Yes"
+    if r.get("term"):
+        t = r["term"]
+        d = t.get("dur") or {}
+        print(f"term: {t['name']} available={t['avail']} "
+              f"{d.get('start','')[:10]} to {d.get('end','')[:10]}")
+        if ca == "Term":
+            import datetime
+            now = datetime.datetime.now(datetime.timezone.utc).isoformat()
+            open_now = (t["avail"] == "Yes"
+                        and d.get("start", "") <= now <= d.get("end", "z"))
+    print(f"students can reach the course: {'yes' if open_now else 'NO'}\n")
+    names = {cfg["folder_id"]: "syllabus folder",
+             (cfg.get("files_folder_id") or cfg["folder_id"]): "files folder"}
+    for fid, items in r["folders"].items():
+        print(f"{names.get(fid, fid)} ({fid})")
+        for i in items:
+            seen = "visible" if (open_now and i["a"] == "Yes") else "hidden"
+            print(f"  {i['p']:>2}  {seen:<8} {i['h']:<12} {html.unescape(i['t'])}")
+        print()
+
+
 def delete_ids(cfg, token, ids):
     """Delete specific content items by id, after showing what they are.
 
@@ -495,7 +550,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("target", nargs="?", default="pages",
-                    choices=["pages", "link", "all", "files", "delete"])
+                    choices=["pages", "link", "all", "files", "status", "delete"])
     ap.add_argument("--print", action="store_true", dest="only_print",
                     help="write the HTML locally and push nothing")
     ap.add_argument("--publish", action="store_true",
@@ -507,6 +562,10 @@ def main():
     if not CONFIG.exists():
         sys.exit(f"missing {CONFIG.name}")
     cfg = json.loads(CONFIG.read_text())
+
+    if args.target == "status":
+        status(cfg)
+        return
 
     if args.target == "files":
         host_pdfs(cfg)
