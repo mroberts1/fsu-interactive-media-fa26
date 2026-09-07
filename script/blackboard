@@ -280,20 +280,62 @@ def push_link(cfg, token, existing):
     return browser_eval(js)
 
 
+def delete_ids(cfg, token, ids):
+    """Delete specific content items by id, after showing what they are.
+
+    Addressed by id, never by title: a title can match two items, which is how
+    the duplicate this exists to clean up got created in the first place. The
+    ids have to come from a human reading the folder listing, so there is no
+    path where the script picks a victim on its own.
+    """
+    js = f"""
+(async () => {{
+  const B = {json.dumps(cfg['base_url'] + API)};
+  const H = {{'X-Blackboard-XSRF':{json.dumps(token)}}};
+  const out = [];
+  for (const id of {json.dumps(ids)}) {{
+    const g = await fetch(B + '/courses/{cfg["course_id"]}/contents/' + id,
+      {{credentials:'same-origin'}});
+    if (g.status !== 200) {{ out.push({{id:id, status:g.status, title:null}}); continue; }}
+    const j = await g.json();
+    const d = await fetch(B + '/courses/{cfg["course_id"]}/contents/' + id,
+      {{method:'DELETE', credentials:'same-origin', headers:H}});
+    out.push({{id:id, status:d.status, title:j.title,
+               avail:j.availability && j.availability.available}});
+  }}
+  return JSON.stringify({{results:out}});
+}})()
+"""
+    return browser_eval(js)["results"]
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("target", nargs="?", default="pages",
-                    choices=["pages", "link", "all"])
+                    choices=["pages", "link", "all", "delete"])
     ap.add_argument("--print", action="store_true", dest="only_print",
                     help="write the HTML locally and push nothing")
     ap.add_argument("--publish", action="store_true",
                     help="make the documents visible to students")
+    ap.add_argument("--ids", nargs="+", metavar="ID",
+                    help="content ids for `delete`, from the folder listing")
     args = ap.parse_args()
 
     if not CONFIG.exists():
         sys.exit(f"missing {CONFIG.name}")
     cfg = json.loads(CONFIG.read_text())
+
+    if args.target == "delete":
+        if not args.ids:
+            sys.exit("delete needs --ids; get them from the folder listing")
+        goto_api(cfg)
+        for r in delete_ids(cfg, xsrf(), args.ids):
+            if r["status"] in (200, 204):
+                print(f"deleted {r['id']}  {r['title']!r} (was available: {r['avail']})")
+            else:
+                print(f"FAILED  {r['id']}  HTTP {r['status']}")
+        return
 
     out = build_site()
     rendered = {}

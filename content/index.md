@@ -1,5 +1,5 @@
 ---
-title: "History of Interactive Media & Games"
+title: "History of Interactive Media and Games"
 instructor: Martin Roberts
 institution: Fitchburg State University
 term: Fall 2026
@@ -10,7 +10,7 @@ term: Fall 2026
 <small>Image: [*Serial Experiments Lain*](https://en.wikipedia.org/wiki/Serial_Experiments_Lain) (1998) </small>
 
 > [!custom] COMM 2003  
-> History of Interactive Media & Games  
+> History of Interactive Media and Games  
 > Dr. Martin Roberts  
 > [Communications Media Department](https://www.fitchburgstate.edu/academics/academic-schools/school-arts-and-sciences/communications-media-department)  
 > [Fitchburg State University](https://fitchburgstate.edu)  
