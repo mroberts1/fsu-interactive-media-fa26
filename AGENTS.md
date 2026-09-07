@@ -439,6 +439,14 @@ Open Sans, its interface font. A `font_family` key still works but only affects
 elements Blackboard does not style; matching FA25's helvetica would need inline
 styles on every element, which is what makes that document 135 spans long.
 
+Blackboard appends new content at the end of a folder, so anything deleted and
+recreated (a retitle, say) silently moves to the bottom and the folder stops
+opening on the syllabus. `push_document` therefore sends `position` on every
+push, not just on create, taken from the order of the `pages` list in
+`blackboard.json`. Reordering the folder means reordering that list and
+pushing, rather than dragging in the Blackboard UI, which the next push would
+undo anyway.
+
 Look items up by title, never by remembered id. `children()` matches on title so
 a document moved or renamed in the UI is found rather than duplicated.
 

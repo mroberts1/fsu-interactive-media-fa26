@@ -68,6 +68,17 @@ checking formatting first.
 A page can opt out permanently with `"publish": false` in `blackboard.json`.
 Panels is set that way, because panels are cut for Fall 2026.
 
+## Changing the order of things
+
+The order of documents in the Syllabus folder comes from the `pages` list in
+`blackboard.json`, and is reapplied on every push. To reorder, move entries in
+that list and push. Dragging items around in Blackboard works until the next
+push puts them back.
+
+Blackboard appends new items at the end, so anything recreated rather than
+updated lands at the bottom. That is why the syllabus once ended up below the
+schedule.
+
 ## Things that look broken but are not
 
 A folder that looks empty in Blackboard after a successful push usually means

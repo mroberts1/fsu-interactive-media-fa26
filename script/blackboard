@@ -225,8 +225,15 @@ def children(cfg):
     return found
 
 
-def push_document(cfg, token, title, html, existing, publish):
-    """Create or update one document. PATCH when it is already there."""
+def push_document(cfg, token, title, html, existing, publish, position):
+    """Create or update one document. PATCH when it is already there.
+
+    position is sent every time, not just on create. Blackboard appends a new
+    item at the end of the folder, so a document that gets recreated (after a
+    delete, or a retitle) silently moves to the bottom and the folder no longer
+    opens on the syllabus. Ordering therefore comes from blackboard.json rather
+    than from creation order.
+    """
     b64 = base64.b64encode(html.encode()).decode()
     hit = existing.get(title)
     avail = "Yes" if publish else "No"
@@ -237,6 +244,7 @@ def push_document(cfg, token, title, html, existing, publish):
   const H = {{'Content-Type':'application/json','Accept':'application/json',
               'X-Blackboard-XSRF':{json.dumps(token)}}};
   const payload = JSON.stringify({{title:{json.dumps(title)}, body: body,
+    position:{position},
     availability:{{available:{json.dumps(avail)}}},
     contentHandler:{{id:'resource/x-bb-document'}}}});
   const hit = {json.dumps(hit)};
@@ -255,7 +263,7 @@ def push_document(cfg, token, title, html, existing, publish):
     return browser_eval(js)
 
 
-def push_link(cfg, token, existing):
+def push_link(cfg, token, existing, position):
     """The external link back to the Pages site, as FA25 had it."""
     title = cfg["link_title"]
     hit = existing.get(title)
@@ -265,6 +273,7 @@ def push_link(cfg, token, existing):
   const H = {{'Content-Type':'application/json','Accept':'application/json',
               'X-Blackboard-XSRF':{json.dumps(token)}}};
   const payload = JSON.stringify({{title:{json.dumps(title)},
+    position:{position},
     availability:{{available:'Yes'}},
     contentHandler:{{id:'resource/x-bb-externallink', url:{json.dumps(cfg['site_url'])}}}}});
   const hit = {json.dumps(hit)};
@@ -539,7 +548,7 @@ def main():
     existing = children(cfg)
 
     if args.target in ("pages", "all"):
-        for page in cfg["pages"]:
+        for pos, page in enumerate(cfg["pages"]):
             # A page can opt out of --publish with "publish": false, for content
             # that should stay in the vault and in Blackboard but not be visible
             # to students yet. Without this, --publish is all-or-nothing.
@@ -547,13 +556,13 @@ def main():
             if args.publish and not publish:
                 print(f"holding {page['title']} hidden (publish: false)")
             res = push_document(cfg, token, page["title"],
-                                rendered[page["title"]], existing, publish)
+                                rendered[page["title"]], existing, publish, pos)
             if res["status"] not in (200, 201):
                 sys.exit(f"{page['title']}: HTTP {res['status']} {res.get('err')}")
             print(f"{res['action']} {page['title']} ({res['sent']} bytes)")
 
     if args.target in ("link", "all"):
-        res = push_link(cfg, token, existing)
+        res = push_link(cfg, token, existing, len(cfg["pages"]))
         if res["status"] not in (200, 201):
             sys.exit(f"{cfg['link_title']}: HTTP {res['status']} {res.get('err')}")
         print(f"{res['action']} {cfg['link_title']}")
