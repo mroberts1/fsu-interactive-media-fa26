@@ -33,6 +33,7 @@ approval is "publish to Blackboard" rather than "read every session cookie".
 
 import argparse
 import base64
+import html
 import json
 import re
 import subprocess
@@ -100,7 +101,7 @@ def browser_eval(js):
         sys.exit(f"unexpected agent-browser output:\n{r.stdout[:400]}")
 
 
-def transform(html, cfg):
+def transform(page_html, cfg):
     """Article HTML -> HTML for Blackboard.
 
     Much lighter than the Canvas equivalent. Blackboard's REST write path does
@@ -109,7 +110,7 @@ def transform(html, cfg):
     data-* attributes all round-trip intact. So this only strips Quartz's own
     chrome and fixes URLs.
     """
-    m = re.search(r"<article[^>]*>(.*?)</article>", html, re.S)
+    m = re.search(r"<article[^>]*>(.*?)</article>", page_html, re.S)
     if not m:
         sys.exit("no <article> in the built page")
     a = m.group(1)
@@ -199,7 +200,28 @@ def children(cfg):
     res = browser_eval(js)
     if "error" in res:
         sys.exit(f"could not list the folder (HTTP {res['error']}). Logged in?")
-    return {c["title"]: c["id"] for c in res["items"]}
+    # Blackboard stores titles HTML-escaped and hands them back that way, so a
+    # title containing & comes back as &amp; and never matches the raw title we
+    # sent. That silently turns every push into a create, duplicating the page.
+    # Unescape before matching. Only titles with entities were affected, which
+    # is why this went unnoticed on the other five pages.
+    found = {}
+    dupes = {}
+    for c in res["items"]:
+        t = html.unescape(c["title"])
+        if t in found:
+            dupes.setdefault(t, [found[t]]).append(c["id"])
+        else:
+            found[t] = c["id"]
+    # Refuse rather than guess. With two items sharing a title there is no way
+    # to tell which one students are looking at, and picking wrong silently
+    # updates the invisible copy while the live one goes stale. Deleting is a
+    # judgement call about published content, so it stays a human action.
+    if dupes:
+        lines = "\n".join(f"  {t}\n    {'  '.join(ids)}" for t, ids in dupes.items())
+        sys.exit("duplicate titles in the target folder; delete the extras in "
+                 f"Blackboard before pushing:\n{lines}")
+    return found
 
 
 def push_document(cfg, token, title, html, existing, publish):
@@ -299,8 +321,14 @@ def main():
 
     if args.target in ("pages", "all"):
         for page in cfg["pages"]:
+            # A page can opt out of --publish with "publish": false, for content
+            # that should stay in the vault and in Blackboard but not be visible
+            # to students yet. Without this, --publish is all-or-nothing.
+            publish = args.publish and page.get("publish", True)
+            if args.publish and not publish:
+                print(f"holding {page['title']} hidden (publish: false)")
             res = push_document(cfg, token, page["title"],
-                                rendered[page["title"]], existing, args.publish)
+                                rendered[page["title"]], existing, publish)
             if res["status"] not in (200, 201):
                 sys.exit(f"{page['title']}: HTTP {res['status']} {res.get('err')}")
             print(f"{res['action']} {page['title']} ({res['sent']} bytes)")

@@ -20,7 +20,8 @@
     },
     {
       "source": "panels",
-      "title": "Panels"
+      "title": "Panels",
+      "publish": false
     },
     {
       "source": "bibliography",
