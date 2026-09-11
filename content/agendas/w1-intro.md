@@ -1,5 +1,5 @@
 ---
-title: "W1 Introduction"
+title: "W1: Introduction"
 ---
 
 ## Interactivity: One Definition
