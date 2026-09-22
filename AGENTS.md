@@ -392,16 +392,29 @@ works, but the next push overwrites it.
     script/blackboard link     the "Web syllabus" external link
     script/blackboard all      both
     --print                    write the HTML locally, push nothing
-    --publish                  make the documents visible to students
+    --hidden                   push the documents unavailable to students
 
-Without `--publish` documents are created unavailable, so a push can be checked
-in Blackboard before students can see it. Generated `blackboard-*.html` files
-are build artifacts and gitignored.
+Pushes are visible to students by default. Pages are checked on the dev server
+before they get here, and the old hidden default meant every push without a
+flag took live syllabus pages away from students. `"publish": false` on a page
+in `blackboard.json` keeps that one page hidden (Panels uses it). Generated
+`blackboard-*.html` files are build artifacts and gitignored.
 
 Course id, site url, folder id and page list live in `blackboard.json`. The
 Fall 2026 shell is `_109741_1` and its Syllabus folder is `_3433065_1`. Both
 FA25 and FA26 are `ultraStatus: CLASSIC`, not Ultra, even though `/ultra/` URLs
 render them.
+
+Agenda pages push to their own folder, `Agendas` (`_3734607_1`), listed under
+`agendas` and `agendas_folder_id` in `blackboard.json`. `pages` pushes both
+groups. A new week's agenda is not picked up automatically: add it to the
+`agendas` list, in order. Top-level folders are what Blackboard shows in the
+course menu, so creating one with `POST /courses/<id>/contents` (no parent) is
+how a menu section is made; it lands at the bottom until given a `position`.
+The folder's own availability is a separate gate from its documents'.
+
+Relative links are resolved against each page's own URL, not the site root,
+so `./w3-hyperfiction` on an agenda page points at `agendas/w3-hyperfiction`.
 
 Fitchburg does not hand instructors an API key, so auth is the logged-in
 browser session driven through `agent-browser`, the same as `script/canvas` in
@@ -464,7 +477,7 @@ with no glyph and leaves an empty, unclickable link. Icons are a Pages-only
 affordance.
 
 Course availability and content availability are separate gates, and the outer
-one is easy to miss. `--publish` only sets `availability.available` on the
+one is easy to miss. A push only sets `availability.available` on the
 documents; if the course shell itself is unavailable, students still see
 nothing. There is no button for it on any content page. It lives at Control
 Panel > Customization > Properties, a radio group named `available` with Yes /

@@ -5,7 +5,7 @@
     script/blackboard link      the "Web syllabus" external link
     script/blackboard all       both
     --print                     write the HTML locally, push nothing
-    --publish                   make the documents visible to students
+    --hidden                    push the documents unavailable to students
 
 Blackboard is an OUTPUT, like the Pages site and the PDF. The vault is the
 source. Editing a generated document inside Blackboard means the next push
@@ -41,6 +41,7 @@ import subprocess
 import sys
 import tempfile
 from pathlib import Path
+from urllib.parse import urljoin
 
 VAULT = Path(__file__).resolve().parent.parent
 CONFIG = VAULT / "blackboard.json"
@@ -102,7 +103,7 @@ def browser_eval(js):
         sys.exit(f"unexpected agent-browser output:\n{r.stdout[:400]}")
 
 
-def transform(page_html, cfg):
+def transform(page_html, cfg, source):
     """Article HTML -> HTML for Blackboard.
 
     Much lighter than the Canvas equivalent. Blackboard's REST write path does
@@ -146,10 +147,11 @@ def transform(page_html, cfg):
 
     # Relative URLs would resolve against blackboard.fitchburgstate.edu, so
     # point them at the published site. Matching only "./" would miss bare
-    # relatives like "img/x.png".
-    site = cfg["site_url"].rstrip("/")
-    a, n = re.subn(r'(src|href)="(?!https?:|mailto:|data:|#|/)\.?/?([^"]+)"',
-                   rf'\1="{site}/\2"', a)
+    # relatives like "img/x.png". Resolve against the page's own URL, not the
+    # site root: from agendas/w4, "./w3" means agendas/w3 and "../pdf" the root.
+    page_url = cfg["site_url"].rstrip("/") + "/" + source
+    a, n = re.subn(r'(src|href)="(?!https?:|mailto:|data:|#|/)([^"]+)"',
+                   lambda mo: f'{mo.group(1)}="{urljoin(page_url, mo.group(2))}"', a)
     if n:
         notes.append(f"absolutised {n} relative URLs")
 
@@ -182,7 +184,7 @@ def transform(page_html, cfg):
     return a.strip(), notes
 
 
-def children(cfg):
+def children(cfg, folder):
     """Existing items in the target folder, by title.
 
     Matched on title rather than a remembered id so a document edited or moved
@@ -191,7 +193,7 @@ def children(cfg):
     js = f"""
 (async () => {{
   const r = await fetch({json.dumps(cfg['base_url'] + API)}
-    + '/courses/{cfg["course_id"]}/contents/{cfg["folder_id"]}/children?limit=200',
+    + '/courses/{cfg["course_id"]}/contents/{folder}/children?limit=200',
     {{credentials:'same-origin', headers:{{Accept:'application/json'}}}});
   if (r.status !== 200) return JSON.stringify({{error:r.status}});
   const j = await r.json();
@@ -225,7 +227,7 @@ def children(cfg):
     return found
 
 
-def push_document(cfg, token, title, html, existing, publish, position):
+def push_document(cfg, token, folder, title, html, existing, publish, position):
     """Create or update one document. PATCH when it is already there.
 
     position is sent every time, not just on create. Blackboard appends a new
@@ -251,7 +253,7 @@ def push_document(cfg, token, title, html, existing, publish, position):
   const r = hit
     ? await fetch(B + '/courses/{cfg["course_id"]}/contents/' + hit,
         {{method:'PATCH', credentials:'same-origin', headers:H, body:payload}})
-    : await fetch(B + '/courses/{cfg["course_id"]}/contents/{cfg["folder_id"]}/children',
+    : await fetch(B + '/courses/{cfg["course_id"]}/contents/{folder}/children',
         {{method:'POST', credentials:'same-origin', headers:H, body:payload}});
   const t = await r.text();
   let id = null; try {{ id = JSON.parse(t).id; }} catch(e) {{}}
@@ -478,7 +480,8 @@ def status(cfg):
   const c = await g('/courses/{cfg["course_id"]}');
   let term = null;
   if (c.termId) term = await g('/terms/' + c.termId);
-  const folders = {json.dumps([cfg["folder_id"], cfg.get("files_folder_id") or cfg["folder_id"]])};
+  const folders = {json.dumps([cfg["folder_id"], cfg.get("files_folder_id") or cfg["folder_id"]]
+                               + ([cfg["agendas_folder_id"]] if cfg.get("agendas_folder_id") else []))};
   const out = {{}};
   for (const f of [...new Set(folders)]) {{
     const j = await g('/courses/{cfg["course_id"]}/contents/' + f + '/children?limit=200');
@@ -508,7 +511,8 @@ def status(cfg):
                         and d.get("start", "") <= now <= d.get("end", "z"))
     print(f"students can reach the course: {'yes' if open_now else 'NO'}\n")
     names = {cfg["folder_id"]: "syllabus folder",
-             (cfg.get("files_folder_id") or cfg["folder_id"]): "files folder"}
+             (cfg.get("files_folder_id") or cfg["folder_id"]): "files folder",
+             cfg.get("agendas_folder_id"): "agendas folder"}
     for fid, items in r["folders"].items():
         print(f"{names.get(fid, fid)} ({fid})")
         for i in items:
@@ -553,8 +557,8 @@ def main():
                     choices=["pages", "link", "all", "files", "status", "delete"])
     ap.add_argument("--print", action="store_true", dest="only_print",
                     help="write the HTML locally and push nothing")
-    ap.add_argument("--publish", action="store_true",
-                    help="make the documents visible to students")
+    ap.add_argument("--hidden", action="store_true",
+                    help="push the documents unavailable to students")
     ap.add_argument("--ids", nargs="+", metavar="ID",
                     help="content ids for `delete`, from the folder listing")
     args = ap.parse_args()
@@ -583,42 +587,53 @@ def main():
         return
 
     out = build_site()
+    # Each group is a folder and the pages that go in it, in order. Agendas
+    # get their own top-level folder, which Blackboard shows in the course menu.
+    groups = [(cfg["folder_id"], cfg["pages"])]
+    if cfg.get("agendas"):
+        groups.append((cfg["agendas_folder_id"], cfg["agendas"]))
+
     rendered = {}
-    for page in cfg["pages"]:
-        src = out / page["source"] / "index.html"
-        if not src.exists():
-            src = out / f"{page['source']}.html"
-        if not src.exists():
-            sys.exit(f"built page not found for {page['source']}")
-        html, notes = transform(src.read_text(), cfg)
-        rendered[page["title"]] = html
-        for n in notes:
-            print(f"  {page['source']}: {n}")
+    for _, pages in groups:
+        for page in pages:
+            src = out / page["source"] / "index.html"
+            if not src.exists():
+                src = out / f"{page['source']}.html"
+            if not src.exists():
+                sys.exit(f"built page not found for {page['source']}")
+            html, notes = transform(src.read_text(), cfg, page["source"])
+            rendered[page["title"]] = html
+            for n in notes:
+                print(f"  {page['source']}: {n}")
 
     if args.only_print:
-        for page in cfg["pages"]:
-            dest = VAULT / f"blackboard-{page['source']}.html"
-            dest.write_text(rendered[page["title"]])
-            print(f"wrote {dest.name} ({len(rendered[page['title']])} bytes)")
+        for _, pages in groups:
+            for page in pages:
+                dest = VAULT / f"blackboard-{page['source'].replace('/', '-')}.html"
+                dest.write_text(rendered[page["title"]])
+                print(f"wrote {dest.name} ({len(rendered[page['title']])} bytes)")
         return
 
     goto_api(cfg)
     token = xsrf()
-    existing = children(cfg)
+    existing = children(cfg, cfg["folder_id"])
 
     if args.target in ("pages", "all"):
-        for pos, page in enumerate(cfg["pages"]):
-            # A page can opt out of --publish with "publish": false, for content
-            # that should stay in the vault and in Blackboard but not be visible
-            # to students yet. Without this, --publish is all-or-nothing.
-            publish = args.publish and page.get("publish", True)
-            if args.publish and not publish:
-                print(f"holding {page['title']} hidden (publish: false)")
-            res = push_document(cfg, token, page["title"],
-                                rendered[page["title"]], existing, publish, pos)
-            if res["status"] not in (200, 201):
-                sys.exit(f"{page['title']}: HTTP {res['status']} {res.get('err')}")
-            print(f"{res['action']} {page['title']} ({res['sent']} bytes)")
+        for folder, pages in groups:
+            in_folder = existing if folder == cfg["folder_id"] else children(cfg, folder)
+            for pos, page in enumerate(pages):
+                # Visible by default: pages are checked on the dev server before
+                # they get here, and a hidden default silently took live pages
+                # away from students on every push. A page stays hidden with
+                # "publish": false; --hidden holds back the whole push.
+                publish = not args.hidden and page.get("publish", True)
+                if not args.hidden and not publish:
+                    print(f"holding {page['title']} hidden (publish: false)")
+                res = push_document(cfg, token, folder, page["title"],
+                                    rendered[page["title"]], in_folder, publish, pos)
+                if res["status"] not in (200, 201):
+                    sys.exit(f"{page['title']}: HTTP {res['status']} {res.get('err')}")
+                print(f"{res['action']} {page['title']} ({res['sent']} bytes)")
 
     if args.target in ("link", "all"):
         res = push_link(cfg, token, existing, len(cfg["pages"]))
@@ -626,8 +641,8 @@ def main():
             sys.exit(f"{cfg['link_title']}: HTTP {res['status']} {res.get('err')}")
         print(f"{res['action']} {cfg['link_title']}")
 
-    if not args.publish and args.target in ("pages", "all"):
-        print("\ndocuments are hidden from students; re-run with --publish "
+    if args.hidden and args.target in ("pages", "all"):
+        print("\ndocuments are hidden from students; re-run without --hidden "
               "to make them visible")
 
 
