@@ -31,9 +31,10 @@ See [[agendas/w1-intro|W1 Introduction]].
 
 ## Week 4 | F 09/25
 
-**Chatbots: A Brief History**
+**Turing Test**
 
-- Sarah Ciston et al., *Inventing ELIZA: How The First Chatbot Shaped the Future of AI* (chs. TBA)
+- Sarah Ciston et al., "[Please Go On: An Introduction](pdf/eliza-intro.pdf)", in [*Inventing ELIZA: How The First Chatbot Shaped the Future of AI*](https://direct.mit.edu/books/oa-monograph/6171/Inventing-ELIZAHow-the-First-Chatbot-Shaped-the).
+- [Loebner Prize](https://en.wikipedia.org/wiki/Loebner_Prize)
 
 ---
 

@@ -18,9 +18,11 @@ public/
 # kept locally and out of the published repo for now.
 *.pdf
 
-# Exceptions: the two Montfort chapters linked from the schedule.
+# Exceptions: the two Montfort chapters linked from the schedule, and the
+# Inventing ELIZA introduction, which MIT Press publishes open access.
 !content/pdf/nick-montfort-adventure.pdf
 !content/pdf/nick-montfort-zork.pdf
+!content/pdf/eliza-intro.pdf
 
 # Editor state. Local settings and appearance, not site content; the same
 # reasoning that keeps .obsidian/ out.
