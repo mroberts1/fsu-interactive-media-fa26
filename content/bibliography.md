@@ -7,7 +7,7 @@ term: Fall 2026
 
 - Ian Bogost and Nick Montfort. *Racing the Beam: The Atari Video Computer System*. MIT Press, 2009.
 
-- Sarah Ciston, David M. Berry, Anthony C. Hay, Mark C. Marino, Peter Millican, Jeff Shrager, Arthur I. Schwarz and Peggy Weil, *Inventing ELIZA: How The First Chatbot Shaped the Future of AI*. Cambridge, MA: MIT Press, 2026.
+- Sarah Ciston, David M. Berry, Anthony C. Hay, Mark C. Marino, Peter Millican, Jeff Shrager, Arthur I. Schwarz and Peggy Weil, [*Inventing ELIZA: How The First Chatbot Shaped the Future of AI*](https://direct.mit.edu/books/oa-monograph/6171/Inventing-ELIZAHow-the-First-Chatbot-Shaped-the). Cambridge, MA: MIT Press, 2026.
 
 - Thomas M. Malaby. *Making Virtual Worlds: Linden Lab and Second Life*. Cornell University Press, 2009.
 
