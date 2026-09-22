@@ -53,18 +53,19 @@ anything, are in [AGENTS.md](AGENTS.md).
 
 ## The theme
 
-Carried over unchanged from the `lang-media-arts` vault this one was cloned
-from.
+Colours come from the letterpress (light) and cyanotype (dark) palettes of
+[jzhao.xyz](https://jzhao.xyz/): navy ink and vermilion on warm paper, and
+light blue and vermilion on prussian blue.
 
 | Role      | Light     | Dark      |
 | --------- | --------- | --------- |
-| light     | `#e2e2e2` | `#191919` |
-| lightgray | `#4e4e4e` | `#393639` |
-| gray      | `#4e4e4e` | `#e2e2e2` |
-| darkgray  | `#4e4e4e` | `#e2e2e2` |
-| dark      | `#4e4e4e` | `#ebebec` |
-| secondary | `#4e4e4e` | `#7c7c7c` |
-| tertiary  | `#c0ffe1` | `#c0ffe1` |
+| light     | `#f5eedd` | `#06182f` |
+| lightgray | `#e3d9c0` | `#122845` |
+| gray      | `#9a8e76` | `#7191b8` |
+| darkgray  | `#2d4673` | `#caddf4` |
+| dark      | `#16294e` | `#eef4fc` |
+| secondary | `#284d78` | `#8fb9de` |
+| tertiary  | `#c8482b` | `#e0552f` |
 
 Type is Helvetica Neue throughout, matching the other course vaults and the
 personal site. It is a system face rather than a webfont, so `fontOrigin` is
@@ -73,7 +74,8 @@ without it lives in `.quartz/quartz/styles/custom.scss`.
 
 Everything the YAML config can't express lives in that `custom.scss`: the
 self-hosted font, a tighter heading scale, wrapped code blocks, a card grid for
-folder listings, and an extra `> [!custom]` callout type using the mint accent.
+folder listings, and an extra `> [!custom]` callout type using the vermilion
+accent.
 
 ## Updating Quartz
 
