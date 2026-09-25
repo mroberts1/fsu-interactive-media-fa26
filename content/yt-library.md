@@ -7,7 +7,17 @@ Video clips that accompany the [[schedule|Schedule]] are grouped by the week the
 
 ## Week 4: Turing Test
 
-A couple of interesting examples of the Reverse Turing Test, a situation that we increasingly often find ourselves in today in an online world dominated by bots and other automated systems.
+David Attenborough is now narrating my life:
+
+![](https://www.youtube.com/watch?v=wOEz5xRLaRA)
+
+Tom Gerken, "[Matt Lucas and Hugh Bonneville among actors calling for law on AI voice cloning](https://www.bbc.com/news/articles/c4gv5gepxnyo)" (BBC, 29 August 2026)
+
+[ElevenLabs](https://elevenlabs.io/)
+
+***
+
+A couple of examples of the Reverse Turing Test, a situation that we increasingly often find ourselves in today in an online world dominated by bots and other automated systems.
 
 ![](https://www.youtube.com/watch?v=4VrLQXR7mKU)
 
