@@ -5,6 +5,12 @@ description: Screening clips for the weekly agendas, collected in one place
 
 Video clips that accompany the [[schedule|Schedule]] are grouped by the week they belong to. They live here rather than inline so the schedule stays readable.
 
+## Week 4: Turing Test
+
+![](https://www.youtube.com/watch?v=0MmIZLTMHUw)
+
+![](https://www.youtube.com/watch?v=4VrLQXR7mKU)
+
 ## Week 5: Habitat
 
 Chip Morningstar and F. Randall Farmer's *Habitat*, the first graphical virtual
