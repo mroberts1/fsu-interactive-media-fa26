@@ -7,9 +7,13 @@ Video clips that accompany the [[schedule|Schedule]] are grouped by the week the
 
 ## Week 4: Turing Test
 
-![](https://www.youtube.com/watch?v=0MmIZLTMHUw)
+A couple of interesting examples of the Reverse Turing Test, a situation that we increasingly often find ourselves in today in an online world dominated by bots and other automated systems.
 
 ![](https://www.youtube.com/watch?v=4VrLQXR7mKU)
+
+***
+
+![](https://www.youtube.com/watch?v=0MmIZLTMHUw)
 
 ## Week 5: Habitat
 
