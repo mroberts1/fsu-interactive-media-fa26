@@ -19,7 +19,7 @@ Samantha Delouya, "[I'm dating an AI chatbot, and it's one of the best things ev
 
 Samantha Cole, "[‘It’s Hurting Like Hell’: AI Companion Users Are In Crisis, Reporting Sudden Sexual Rejection](https://www.vice.com/en/article/ai-companion-replika-erotic-roleplay-updates/?__readwiseLocation=)" (VICE, 15 February 2023)
 
-Gary Marcus and Ernest Jones, "[If Computers Are So Smart, How Come They Can't Read?](pdf/marcus-rebooting-ai-ch4.pdf)" (_Rebooting AI: Building Artificial Intelligence We Can Trust_ (New York: Pantheon Books, 2019), chapter 4)
+Gary Marcus and Ernest Jones, "[If Computers Are So Smart, How Come They Can't Read?](https://blackboard.fitchburgstate.edu/webapps/blackboard/execute/displayIndividualContent?course_id=_109741_1&content_id=_3736496_1)" (_Rebooting AI: Building Artificial Intelligence We Can Trust_ (New York: Pantheon Books, 2019), chapter 4)
 
-Rhiannon Williams, "[The AI Relationship Revolution Is Already Here](https://www.technologyreview.com/2025/02/13/1111366/ai-relationships-chatbots-parenting-self-care-dating-marriage-mental-health)" (**Technology Review**, 13 February 2025) [[pdf](pdf/rhiannon-williams-ai-relationships.pdf)]
+Rhiannon Williams, "[The AI Relationship Revolution Is Already Here](https://www.technologyreview.com/2025/02/13/1111366/ai-relationships-chatbots-parenting-self-care-dating-marriage-mental-health)" (**Technology Review**, 13 February 2025) [[pdf](https://blackboard.fitchburgstate.edu/webapps/blackboard/execute/displayIndividualContent?course_id=_109741_1&content_id=_3736497_1)]
 
