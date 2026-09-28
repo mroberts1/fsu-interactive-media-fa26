@@ -354,11 +354,11 @@ commit before the first push. The original seven commits survive locally on the
 
 Three standing consequences:
 
-- `*.pdf` is gitignored. The PDFs stay on disk locally but are absent from the
-  repo, so eight links on `/schedule` and `/panels` 404 on the live site. That
-  is expected, not a regression. Restoring them means removing the ignore rule
-  and accepting a 79MB repo, or hosting the readings elsewhere and repointing
-  the links.
+- `*.pdf` is gitignored, with three exceptions listed in `.gitignore`: the two
+  Montfort chapters and the open-access `eliza-intro.pdf`. Other readings stay
+  on disk and are served from Blackboard, which `script/blackboard files`
+  relinks. A relative `pdf/...` link to an ignored file 404s on the live site.
+  Adding an exception means confirming the scan is ours or open access.
 - `content/panels.md` carries no names. Every panel reads `*TBA*`. Keep it that
   way on the public site; a roster belongs in a private note, not here.
 - The Zoom link on `content/index.md` is the bare meeting URL. Do not paste
@@ -368,7 +368,7 @@ Before any future push, check nothing sensitive is being added:
 
 ```
 git grep -nE 'pwd=|^- [A-Z][a-z]+ [A-Z][a-z]+$' main -- content
-git ls-tree -r --name-only main | grep '\.pdf$'
+git ls-tree -r --name-only main | grep '\.pdf$'   # expect only the three exceptions
 ```
 
 CI resolves node from `.quartz/.node-version` via `setup-node`, which installs

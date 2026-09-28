@@ -10,7 +10,7 @@ This file sits at the vault root, so it is never published. Only `content/` is.
 | Output     | What it is                        | How it updates                  |
 | ---------- | --------------------------------- | ------------------------------- |
 | Pages site | https://mroberts1.github.io/fsu-interactive-media-fa26/ | `git push`, then wait ~40s |
-| Blackboard | the FA26 course shell             | `script/blackboard all --publish` |
+| Blackboard | the FA26 course shell             | `script/blackboard all`         |
 | PDF        | a printable syllabus              | `script/pdf`                    |
 
 The vault is the source. All three are outputs. Editing a page inside
@@ -31,7 +31,7 @@ push. If a push says "no Blackboard session found", this is why.
 1. Put the PDF in `content/pdf/`, lowercase and hyphenated, no spaces.
 2. Link it from a page as `[Title](pdf/the-file.pdf)`.
 3. Run `script/blackboard files`.
-4. Run `script/blackboard all --publish`.
+4. Run `script/blackboard all`.
 5. Commit and push.
 
 Step 3 is the one that is easy to forget. It decides where the PDF lives:
@@ -62,8 +62,8 @@ Control Panel, then Customization, then Properties. Currently set to Use Term
 Availability, so it follows the Fall 2026 dates, 3 September to 22 December.
 
 Content availability. Whether each document is visible. That is what
-`--publish` sets. Without it documents are created hidden, which is useful for
-checking formatting first.
+a push sets, visible by default. `--hidden` creates the documents unavailable to
+students, which is useful for checking formatting first.
 
 A page can opt out permanently with `"publish": false` in `blackboard.json`.
 Panels is set that way, because panels are cut for Fall 2026.
@@ -110,8 +110,8 @@ if you have the id from the error.
 
     script/blackboard status             what students can actually see
     script/blackboard files              upload and relink gitignored PDFs
-    script/blackboard all                push everything, leave it hidden
-    script/blackboard all --publish      push and make visible
+    script/blackboard all                push everything, visible to students
+    script/blackboard all --hidden       push everything, unavailable to students
     script/blackboard pages --print      build the HTML locally, push nothing
     script/blackboard delete --ids X Y   remove content items by id
     script/pdf                           regenerate the syllabus PDF
