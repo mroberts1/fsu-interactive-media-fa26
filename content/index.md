@@ -1,5 +1,5 @@
 ---
-title: "History of Interactive Media and Games"
+title: History of Interactive Media & Games
 instructor: Martin Roberts
 institution: Fitchburg State University
 term: Fall 2026
