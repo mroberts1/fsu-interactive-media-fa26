@@ -529,8 +529,23 @@ pre {
   .readermode,
   .page-footer,
   footer,
-  .external-icon {
+  .external-icon,
+  .breadcrumb-container,
+  .content-meta {
     display: none !important;
+  }
+
+  // Syllabus PDF: title, image and course callout on page 1, the syllabus
+  // proper from Overview on page 2.
+  body[data-slug="syllabus"] article > p:first-child img {
+    display: block;
+    max-height: 3.5in;
+    width: auto;
+    margin: 0 auto;
+  }
+
+  body[data-slug="syllabus"] h2#overview {
+    break-before: page;
   }
 
   // Quartz's separator before the footer. It is a direct child of .center, so
@@ -583,12 +598,12 @@ pre {
     break-inside: avoid;
   }
 
-  // Underlined blue links read as noise on paper, and internal links carry a
-  // highlight box that prints as a grey slab.
+  // Blue reads as noise on paper, so links print dark and underlined instead.
+  // Internal links carry a highlight box that prints as a grey slab.
   a,
   a.internal {
     color: #222;
     background: none !important;
-    text-decoration: none;
+    text-decoration: underline !important;
   }
 }
