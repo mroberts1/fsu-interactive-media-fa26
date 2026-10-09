@@ -55,6 +55,8 @@ See [[agendas/w1-intro|W1 Introduction]].
 
 **Myst**
 
+See [[agendas/w6-avatars|W6 Avatars]].
+
 [Videos: *Myst* (2)](yt-library#week-6-myst)
 
 - [Myst](https://cyan.com/games/myst/)
