@@ -54,6 +54,10 @@
     {
       "source": "agendas/w4-turing-test",
       "title": "W4: Turing Test"
+    },
+    {
+      "source": "agendas/w6-avatars",
+      "title": "W6: Avatars"
     }
   ]
 }
