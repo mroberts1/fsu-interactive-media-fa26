@@ -5,6 +5,8 @@ institution: Fitchburg State University
 term: Fall 2026
 ---
 
+<h1 class="print-title">History of Interactive Media & Games</h1>
+
 ![[img/serial-experiments-lain-terminal.png]]
 
 <small>Image: [*Serial Experiments Lain*](https://en.wikipedia.org/wiki/Serial_Experiments_Lain) (1998) </small>

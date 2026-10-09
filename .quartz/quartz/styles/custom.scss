@@ -495,6 +495,11 @@ pre {
   --fa: "\f09b";
 }
 
+// The syllabus PDF cover title, shown only in print. See @media print below.
+.print-title {
+  display: none;
+}
+
 // Print. Syllabi get handed out as PDFs, printed from the built page so they
 // keep the site's fonts, callouts and colours. Generate with ./script/pdf.
 @media print {
@@ -535,9 +540,18 @@ pre {
     display: none !important;
   }
 
-  // Syllabus PDF: title, image and course callout on page 1, the syllabus
-  // proper from Overview on page 2.
-  body[data-slug="syllabus"] article > p:first-child img {
+  // Syllabus PDF: course title, image and course callout on page 1, the
+  // syllabus proper from Overview on page 2. The page is titled "Syllabus" on
+  // the site, so the cover swaps in the course title from syllabus.md.
+  body[data-slug="syllabus"] h1.article-title {
+    display: none;
+  }
+
+  body[data-slug="syllabus"] .print-title {
+    display: block;
+  }
+
+  body[data-slug="syllabus"] article p:first-of-type img {
     display: block;
     max-height: 3.5in;
     width: auto;
