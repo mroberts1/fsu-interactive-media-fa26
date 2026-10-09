@@ -18,7 +18,7 @@ term: Fall 2026
 >
 > Thu 3 Sept---Fri 11 Dec 2026 | Fridays 14:00-15:15 | Conlon Hall 341  
 > Office hrs: Friday 16:00-17:00 (via [Zoom](https://zoom.us/j/6720382354))  
-> [Blackboard](https://blackboard.fitchburgstate.edu/ultra/courses/_109741_1/cl/outline)\
+> [Blackboard](https://blackboard.fitchburgstate.edu/ultra/courses/_109741_1/cl/outline) \| [Syllabus (PDF)](pdf/syllabus.pdf)\
 > [<i class="fa-solid fa-envelope" role="img" aria-label="Email"></i>](mailto:mrober40@fitchburgstate.edu) \| [<i class="fa-brands fa-mastodon" role="img" aria-label="Mastodon"></i>](https://merveilles.town/@dokoissho) \| [<i class="fa-brands fa-github" role="img" aria-label="GitHub"></i>](https://github.com/mroberts1/fsu-interactive-media-fa26)
 
 ## Overview

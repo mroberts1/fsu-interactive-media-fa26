@@ -23,6 +23,8 @@ public/
 !content/pdf/nick-montfort-adventure.pdf
 !content/pdf/nick-montfort-zork.pdf
 !content/pdf/eliza-intro.pdf
+# Our own work: the printable syllabus, regenerated with script/pdf.
+!content/pdf/syllabus.pdf
 
 # Editor state. Local settings and appearance, not site content; the same
 # reasoning that keeps .obsidian/ out.
