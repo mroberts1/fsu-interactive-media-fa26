@@ -176,6 +176,13 @@ the registry (v0.0.1, a transmission-daemon client).
 
 Both scripts work from any directory.
 
+`content/syllabus.md` is a static merge of index, assignments, schedule,
+bibliography and policies, in that order; edits to those pages do not reach
+it. `script/pdf syllabus` writes `content/pdf/syllabus.pdf`, which is tracked
+and linked from the index callout. CI does not regenerate it, so rerun and
+commit it after any syllabus change. The cover title comes from a print-only
+`<h1 class="print-title">` in syllabus.md, since the page title is "Syllabus".
+
 `.quartz/.node-version` pins `22.23.2`, the same value as every sibling vault,
 so all five sites build on one Node. If nodenv here lacks it, `./dev.sh` dies
 with `nodenv: version '22.23.2' is not installed` before reaching Quartz; either
