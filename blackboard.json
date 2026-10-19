@@ -56,8 +56,12 @@
       "title": "W4: Turing Test"
     },
     {
-      "source": "agendas/w6-avatars",
-      "title": "W6: Avatars"
+      "source": "agendas/w6-hypermedia",
+      "title": "W6: Hypermedia"
+    },
+    {
+      "source": "agendas/w7-hyperjam",
+      "title": "W7: Hyperjam"
     }
   ]
 }

@@ -18,6 +18,10 @@ public/
 # kept locally and out of the published repo for now.
 *.pdf
 
+# Course software bundles (Apple ROMs, System 7 disks). Blackboard only,
+# via script/blackboard files.
+*.zip
+
 # Exceptions: the two Montfort chapters linked from the schedule, and the
 # Inventing ELIZA introduction, which MIT Press publishes open access.
 !content/pdf/nick-montfort-adventure.pdf

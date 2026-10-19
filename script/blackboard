@@ -419,13 +419,18 @@ def host_pdfs(cfg):
     """
     md = sorted(VAULT.glob("content/**/*.md"))
     wanted = {}
+    paths = {}
     for f in md:
-        for href in re.findall(r"\]\((?:\./)?(pdf/[^)]+\.pdf)\)", f.read_text()):
-            local = VAULT / "content" / href
+        text = f.read_text()
+        # PDFs sit under content/pdf/; zips are linked relative to their page.
+        for href in (re.findall(r"\]\(((?:\./)?pdf/[^)]+\.pdf)\)", text)
+                     + re.findall(r"\]\(((?:\./|\.\./)*[^)/\s:]+\.zip)\)", text)):
+            local = (f.parent / href).resolve()
             if local.exists() and not is_tracked(local):
-                wanted.setdefault(local.name, []).append(f)
+                wanted.setdefault(local.name, []).append((f, href))
+                paths[local.name] = local
     if not wanted:
-        print("no gitignored PDFs linked from the vault; nothing to host")
+        print("no gitignored PDFs or zips linked from the vault; nothing to host")
         return
 
     goto_api(cfg)
@@ -439,7 +444,7 @@ def host_pdfs(cfg):
                 urls[name] = content_url(cfg, have[name])
                 print(f"already hosted  {name}")
                 continue
-            path = VAULT / "content" / "pdf" / name
+            path = paths[name]
             mb = path.stat().st_size / 1048576
             up = upload_pdf(cfg, curlrc, path)
             if "id" not in up:
@@ -454,11 +459,10 @@ def host_pdfs(cfg):
         shutil.rmtree(d, ignore_errors=True)
 
     # Rewrite the vault so both outputs use the Blackboard URL.
-    for name, files in wanted.items():
-        for f in set(files):
+    for name, links in wanted.items():
+        for f, href in set(links):
             s = f.read_text()
-            s2 = re.sub(r"\]\((?:\./)?pdf/" + re.escape(name) + r"\)",
-                        "](" + urls[name] + ")", s)
+            s2 = s.replace("](" + href + ")", "](" + urls[name] + ")")
             if s2 != s:
                 f.write_text(s2)
                 print(f"relinked        {name} in {f.relative_to(VAULT)}")
