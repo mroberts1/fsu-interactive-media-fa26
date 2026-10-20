@@ -22,15 +22,16 @@ The site was converted from the Quarto project at
 
 | Quartz page           | Quarto source                                 |
 | --------------------- | --------------------------------------------- |
-| `index.md`            | `index.qmd`, front matter through assignments |
-| `schedule.md`         | `index.qmd`, the Schedule section             |
-| `policies.md`         | `index.qmd`, the Policies section             |
-| `panels.md`           | `groups.qmd`                                  |
+| `index.md`            | `index.qmd`                                   |
 | `agendas/w1-intro.md` | `w1-intro.qmd`                                |
 
-The Quarto site put the schedule and the policies inside `index.qmd`. They are
-split out here because Quartz navigates by page in the explorer, where one
-350-line index would be a single opaque entry.
+`index.md` is the whole syllabus on one page: overview, films, assignments,
+schedule, bibliography and policies, in that order, with the table of contents
+in the right margin. The Schedule, Bibliography and Policies sections were once
+separate pages (`schedule.md`, `bibliography.md`, `policies.md`, plus
+`assignments.md`) and were merged so the site, the PDF and Blackboard all show
+the same single document. `panels.md` (from `groups.qmd`) was deleted as
+unneeded. Weeks are `###` headings under `## Schedule`.
 
 Quarto constructs that had no Quartz equivalent and were converted rather than
 carried over:
@@ -51,15 +52,12 @@ Known gaps carried over from the Quarto source, not introduced by the
 conversion:
 
 - `index.qmd` linked `pdf/dibbell-gold-farmers.pdf`, which does not exist in
-  the Quarto project. The Week 7 entry on `schedule.md` names the article
+  the Quarto project. The Week 7 entry in the schedule names the article
   without a link.
-- The Counseling Services paragraph in `policies.md` reads "outreach
+- The Counseling Services paragraph in the Policies section reads "outreach
   ALTERNATIVE ECOSYSTEMSs", a mangled find-and-replace in the original. Left
   verbatim.
 - `index.qmd` had an empty `## Objectives` heading. It is still empty.
-- `panels.md` has had the Fall 2025 rosters cleared: every entry reads
-  `Panel: *TBA*`, awaiting the Fall 2026 roster. Dates are already rolled
-  forward.
 
 ## The wi26 agenda pages
 
@@ -77,7 +75,7 @@ Five were under `Agendas` in the Quarto sidebar; `w1-commentary` was under
 None of these are committed to the Fall 2026 syllabus yet. `w3-dark-forest` in
 particular is provisional: the instructor may drop the Dark Forest unit and is
 keeping the page staged in the meantime. Do not wire any of them into
-`content/schedule.md` or link them from a published page until asked. Dropping
+the schedule in `content/index.md` or link them from a published page until asked. Dropping
 one is `git rm -r` on the page plus the assets only it uses.
 
 Their assets travelled with them in `agendas-wi26/img/` and `agendas-wi26/pdf/`,
@@ -123,18 +121,20 @@ over a per-course `pdf/` directory when hunting for a missing reading.
 ## Screening clips
 
 Video embeds live on `content/yt-library.md`, not inline in the schedule: eight
-600px iframes made `schedule.md` hard to scan. The schedule links into that
+600px iframes made the schedule hard to scan. The schedule links into that
 page by heading anchor (`yt-library#week-5-habitat`), so a renamed heading there
 silently breaks the link. Quartz slugifies headings with github-slugger, and
 `## Week 5: Habitat` becomes `week-5-habitat` — note the pipe form used for the
-schedule's own headings (`Week 5 | F 10/02`) would slug to `week-5--f-1002`,
-which is why the library uses a colon instead.
+schedule's own headings (`Week 5 | F 10/02`) slug to `week-5--f-1002`, which
+is why the library uses a colon instead. The library links back the other way
+with `[[index#week-5--f-1002|Week 5]]`, so renaming a week heading in
+`index.md` breaks those too.
 
 After editing either file, check the anchors still match:
 
 ```
 curl -s localhost:8080/yt-library | grep -oE '<h2 id="[^"]*"'
-curl -s localhost:8080/schedule   | grep -oE 'href="[^"]*yt-library[^"]*"'
+curl -s localhost:8080/ | grep -oE 'href="[^"]*yt-library[^"]*"'
 ```
 
 ## Semester dates
@@ -176,12 +176,12 @@ the registry (v0.0.1, a transmission-daemon client).
 
 Both scripts work from any directory.
 
-`content/syllabus.md` is a static merge of index, assignments, schedule,
-bibliography and policies, in that order; edits to those pages do not reach
-it. `script/pdf syllabus` writes `content/pdf/syllabus.pdf`, which is tracked
-and linked from the index callout. CI does not regenerate it, so rerun and
-commit it after any syllabus change. The cover title comes from a print-only
-`<h1 class="print-title">` in syllabus.md, since the page title is "Syllabus".
+`script/pdf` prints the built `index` page to `content/pdf/syllabus.pdf`, which
+is tracked and linked from the index callout. There is no separate syllabus
+page. CI does not regenerate the PDF, so rerun it and commit the result after
+any change to `index.md`. Page 1 is the title, image and course callout; the
+`@media print` block in `custom.scss` breaks before `## Overview`, and its
+selectors are keyed to `body[data-slug="index"]`.
 
 `.quartz/.node-version` pins `22.23.2`, the same value as every sibling vault,
 so all five sites build on one Node. If nodenv here lacks it, `./dev.sh` dies
@@ -372,8 +372,8 @@ Three standing consequences:
   on disk and are served from Blackboard, which `script/blackboard files`
   relinks. A relative `pdf/...` link to an ignored file 404s on the live site.
   Adding an exception means confirming the scan is ours or open access.
-- `content/panels.md` carries no names. Every panel reads `*TBA*`. Keep it that
-  way on the public site; a roster belongs in a private note, not here.
+- Student rosters and panel assignments do not belong on the public site; keep
+  them in a private note. `panels.md` was removed.
 - The Zoom link on `content/index.md` is the bare meeting URL. Do not paste
   back a link with `?pwd=` in it.
 
@@ -417,8 +417,13 @@ works, but the next push overwrites it.
 Pushes are visible to students by default. Pages are checked on the dev server
 before they get here, and the old hidden default meant every push without a
 flag took live syllabus pages away from students. `"publish": false` on a page
-in `blackboard.json` keeps that one page hidden (Panels uses it). Generated
+in `blackboard.json` keeps that one page hidden. Generated
 `blackboard-*.html` files are build artifacts and gitignored.
+
+The Syllabus folder holds one syllabus document (built from `index`), the Video
+Library and the "Web syllabus" link. There are no per-section documents; the
+old Assignments, Schedule, Policies, Panels and Bibliography documents were
+merged into the one page.
 
 Course id, site url, folder id and page list live in `blackboard.json`. The
 Fall 2026 shell is `_109741_1` and its Syllabus folder is `_3433065_1`. Both
