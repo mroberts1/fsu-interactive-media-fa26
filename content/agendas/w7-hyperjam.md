@@ -1,5 +1,5 @@
 ---
-title: "Hyperjam"
+title: "W7: Hyperjam"
 ---
 
 - [Merveilles Hyperjam](https://itch.io/jam/merveilles-hyperjam)

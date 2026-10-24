@@ -1,6 +1,8 @@
 ---
-title: "*The Shining* (Stanley Kubrick, 1980)"
+title: "The Shining"
 ---
+
+Dir. Stanley Kubrick, 1980.
 
 ![[img/jack-nicholson-maze.webp]]
 

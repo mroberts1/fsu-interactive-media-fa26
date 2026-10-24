@@ -1,5 +1,5 @@
 ---
-title: "Hypermedia"
+title: "W6: Hypermedia"
 ---
 
 
