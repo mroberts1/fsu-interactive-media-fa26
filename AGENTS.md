@@ -23,7 +23,7 @@ The site was converted from the Quarto project at
 | Quartz page           | Quarto source                                 |
 | --------------------- | --------------------------------------------- |
 | `index.md`            | `index.qmd`                                   |
-| `agendas/w1-intro.md` | `w1-intro.qmd`                                |
+| `class-pages/w1-intro.md`| `w1-intro.qmd`                                |
 
 `index.md` is the whole syllabus on one page: overview, films, assignments,
 schedule, bibliography and policies, in that order, with the table of contents
@@ -443,7 +443,7 @@ how a menu section is made; it lands at the bottom until given a `position`.
 The folder's own availability is a separate gate from its documents'.
 
 Relative links are resolved against each page's own URL, not the site root,
-so `./w3-hyperfiction` on an agenda page points at `agendas/w3-hyperfiction`.
+so `./w3-hyperfiction` on an agenda page points at `class-pages/w3-hyperfiction`.
 
 Fitchburg does not hand instructors an API key, so auth is the logged-in
 browser session driven through `agent-browser`, the same as `script/canvas` in

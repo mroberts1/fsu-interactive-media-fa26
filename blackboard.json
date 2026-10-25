@@ -19,32 +19,36 @@
   "agendas_folder_id": "_3734607_1",
   "agendas": [
     {
-      "source": "agendas/w1-intro",
+      "source": "class-pages/w1-intro",
       "title": "W1: Introduction"
     },
     {
-      "source": "agendas/w2-caves-mazes",
+      "source": "class-pages/w2-caves-mazes",
       "title": "W2: Caves and Mazes"
     },
     {
-      "source": "agendas/w3-hyperfiction",
+      "source": "class-pages/w3-hyperfiction",
       "title": "W3: Hyperfiction"
     },
     {
-      "source": "agendas/w4-turing-test",
+      "source": "class-pages/w4-turing-test",
       "title": "W4: Turing Test"
     },
     {
-      "source": "agendas/w5-habitat",
+      "source": "class-pages/w5-habitat",
       "title": "W5: Habitat"
     },
     {
-      "source": "agendas/w6-hypermedia",
+      "source": "class-pages/w6-hypermedia",
       "title": "W6: Hypermedia"
     },
     {
-      "source": "agendas/w7-hyperjam",
+      "source": "class-pages/w7-hyperjam",
       "title": "W7: Hyperjam"
+    },
+    {
+      "source": "class-pages/w8-second-lives",
+      "title": "W8: Second Lives"
     }
   ]
 }

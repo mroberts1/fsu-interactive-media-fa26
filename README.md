@@ -28,7 +28,7 @@ Notes at the vault root are drafts and reference material. Only what is under
 | `schedule.md`           | `index.qmd`, the Schedule section |
 | `policies.md`           | `index.qmd`, the Policies section |
 | `panels.md`             | `groups.qmd`                     |
-| `agendas/w1-intro.md`   | `w1-intro.qmd`                   |
+| `class-pages/w1-intro.md`  | `w1-intro.qmd`                   |
 
 PDFs live in `content/pdf/` and images in `content/img/`, both linked relative
 to the content root.
