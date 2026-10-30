@@ -160,6 +160,8 @@ See [[w9-demoscene|W9 Demoscenes]].
 - [Hyperallergic article](https://hyperallergic.com/749447/we-met-in-virtual-reality-review/)
 - [Hunting interview](https://immerse.news/as-organic-as-a-real-camera-an-interview-with-joe-hunting-4fd4ea28845b)
 
+See [[w10-vr-chat|W10 VR Chat]].
+
 ---
 
 ### Week 11 | F 11/13
