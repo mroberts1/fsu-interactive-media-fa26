@@ -148,7 +148,7 @@ See [[avatars|W6 Avatars]].
 - [cTrix modules](https://modarchive.org/index.php?request=view_artist_modules&query=80387)
 - [*Moleman 2 -- Demoscene -- The Art of the Algorithms*](https://youtu.be/iRkZcTg1JWU) (YouTube)
 
-***
+See [[w9-demoscene|W9 Demoscenes]].
 
 ---
 
@@ -166,7 +166,7 @@ See [[avatars|W6 Avatars]].
 
 **Psychogeography**
 
-[Videos: *Cyberpunk 2077* (2)](yt-library#week-9-hyperrealism-vs-playability)
+[Videos: *Cyberpunk 2077* (2)](yt-library#week-11-psychogeography)
 
 - Stephen Johnson, "[Watch how video games are approaching perfect photorealism](https://www.freethink.com/hard-tech/unreal-engine-5-photorealism)" (*Freethink*, 30 September 2023)
 - "[The Truth About the Modded *Cyberpunk 2077* Hyperrealism Fad](https://medium.com/@moddedgames/the-truth-about-the-cyberpunk-2077-hyperrealism-fad-b6efda43276c)" (*Medium*, 19 April 2024)

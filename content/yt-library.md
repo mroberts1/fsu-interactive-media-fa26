@@ -67,7 +67,7 @@ See [[index#week-6--f-1009|Week 6]].
 **Hyperrealism vs. Playability**
 
 *Cyberpunk 2077* as ambience and as a modding platform. See
-[[index#week-9--f-1030|Week 9]].
+[[index#week-11--f-1113|Week 11]].
 
 ![](https://www.youtube.com/watch?v=a15V87a_s2U)
 
