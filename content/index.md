@@ -98,7 +98,7 @@ See [[w1-intro|W1 Introduction]].
 
 **Myst**
 
-See [[avatars|W6 Avatars]].
+See [[w6-myst|W6 Myst]].
 
 [Videos: *Myst* (2)](yt-library#week-6-myst)
 
