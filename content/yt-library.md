@@ -5,7 +5,7 @@ description: Screening clips for the weekly agendas, collected in one place
 
 Video clips that accompany the [[index#schedule|Schedule]] are grouped by the week they belong to. They live here rather than inline so the schedule stays readable.
 
-## Week 4: Turing Test
+### Week 4: Turing Test
 
 David Attenborough is now narrating my life:
 
@@ -25,7 +25,9 @@ A couple of examples of the Reverse Turing Test, a situation that we increasingl
 
 ![](https://www.youtube.com/watch?v=0MmIZLTMHUw)
 
-## Week 5: Habitat
+***
+
+### Week 5: Habitat
 
 Chip Morningstar and F. Randall Farmer's *Habitat*, the first graphical virtual
 world. See [[index#week-5--f-1002|Week 5]].
@@ -34,7 +36,9 @@ world. See [[index#week-5--f-1002|Week 5]].
 
 Lucasfilm's Habitat promotional video (F. Randall Farmer)
 
-## Week 6: Myst
+***
+
+### Week 6: Myst
 
 See [[index#week-6--f-1009|Week 6]].
 
@@ -46,7 +50,21 @@ See [[index#week-6--f-1009|Week 6]].
 
 *Myst* (2021) launch trailer (Cyan)
 
-## Week 9: Hyperrealism vs. Playability
+***
+
+### Week 9: Game Music
+
+![](https://youtu.be/O2rlvAyj2PA)
+
+![](https://youtu.be/nqsrWwa_GZE)
+
+![](https://youtu.be/6BOXR008V2I)
+
+***
+
+### Week 11: Psychogeography
+
+**Hyperrealism vs. Playability**
 
 *Cyberpunk 2077* as ambience and as a modding platform. See
 [[index#week-9--f-1030|Week 9]].
