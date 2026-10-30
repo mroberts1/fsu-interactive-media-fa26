@@ -1,6 +1,6 @@
 
 ---
-title: "W2: Caves and Mazes"
+title: "W2: Caves & Mazes"
 ---
 
 ![[img/garden-forking-paths.jpg]]
