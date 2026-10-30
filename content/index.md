@@ -17,7 +17,7 @@ term: Fall 2026
 > Fall 2026, 3 credits
 >
 > Thu 3 Sept -- Fri 11 Dec 2026 | Fridays 14:00-15:15 | Conlon Hall 341  
-> Office hrs: Friday 16:00-17:00 (via [Zoom](https://zoom.us/j/6720382354))  
+> Office hrs: Friday 16:00-17:00 
 > [Blackboard](https://blackboard.fitchburgstate.edu/ultra/courses/_109741_1/cl/outline) \| [Syllabus (PDF)](pdf/syllabus.pdf) | [Sissyfight 2000](https://187-127-250-32.sslip.io/main)\
 > [<i class="fa-solid fa-envelope" role="img" aria-label="Email"></i>](mailto:mrober40@fitchburgstate.edu) \| [<i class="fa-brands fa-mastodon" role="img" aria-label="Mastodon"></i>](https://merveilles.town/@dokoissho) \| [<i class="fa-brands fa-github" role="img" aria-label="GitHub"></i>](https://github.com/mroberts1/fsu-interactive-media-fa26)
 
@@ -109,6 +109,19 @@ See [[avatars|W6 Avatars]].
 
 ### Week 7 | F 10/16
 
+**Hyperjam**
+
+- [Merveilles Hyperjam](https://itch.io/jam/merveilles-hyperjam)
+- [Mini vMac](https://sourceforge.net/projects/minivmac/)
+- [E-Maculation Mini vMac page](https://www.emaculation.com/doku.php/mini_vmac)
+- [Getting started with Mini vMac](https://www.gryphel.com/c/minivmac/start.html)
+- [Gryphel Project](https://www.gryphel.com/index.html) (Paul C. Pratt, 2019)
+- [E-Maculation wiki](https://www.emaculation.com/doku.php)
+
+---
+
+### Week 8 | F 10/23
+
 **Second Lives**
 
 - "[Double Agents](https://www.nytimes.com/slideshow/2007/06/15/magazine/20070617_AVATAR_SLIDESHOW_index.html)" (*New York Times*, 15 June 2007)
@@ -121,7 +134,24 @@ See [[avatars|W6 Avatars]].
 
 ---
 
-### Week 8 | F 10/23
+### Week 9 | F 10/30
+
+**Game Music**
+
+- Collins, Karen. “[‘Loops and Bloops’: Music of the Commodore 64 Games](pdf/karen-collins-commodore64.pdf)”
+- [C64 history](https://jahtari.org/archive/magazine/sid/c64-history.htm) (Jahtari site)
+- [Gamebase64](https://gb64.com/) (C64 games)
+- [Commodore 64](https://www.commodore.ca/) (portal)
+- [HVSC](https://www.hvsc.c64.org/) website
+- [*Viva Amiga: The Documentary*](https://www.amazon.com/gp/video/detail/B01N1X82AU/ref=atv_dp_share_cu_r) (2017)
+- cTrix, [*A for Amiga*](https://bleepstreet.bandcamp.com/album/a-for-amiga)
+- [cTrix modules](https://modarchive.org/index.php?request=view_artist_modules&query=80387)
+
+See [[w9-game-music|W9 Game Music]].
+
+---
+
+### Week 10 | F 11/06
 
 **VRChat**
 
@@ -131,9 +161,9 @@ See [[avatars|W6 Avatars]].
 
 ---
 
-### Week 9 | F 10/30
+### Week 11 | F 11/13
 
-**Virtual Psychogeography**
+**Psychogeography**
 
 [Videos: *Cyberpunk 2077* (2)](yt-library#week-9-hyperrealism-vs-playability)
 
@@ -147,30 +177,13 @@ See [[avatars|W6 Avatars]].
 
 ---
 
-### Week 10 | F 11/06
+### Week 12 | F 11/20
 
 **Generative Worlds**
 
 - Fei Fei Li, "[From Words to Worlds: Spatial Intelligence is AI’s Next Frontier](https://drfeifei.substack.com/p/from-words-to-worlds-spatial-intelligence)" (World Labs, 10 November 2025)
 - "[Marble: A Multimodal World Model](https://www.worldlabs.ai/blog/marble-world-model)" (World Labs, 12 November 2025)
 - "[3D As Code](https://www.worldlabs.ai/blog/3d-as-code)" (World Labs, 3 March 2026)
-
----
-
-### Week 11 | F 11/13
-
-**Photorealistic Worlds**
-
-- "[Atlas: A World Model for Spatial Intelligence](https://www.worldlabs.ai/blog/atlas)" (World Labs, 1 September 2026)
-- "[A Functional Taxonomy of World Models](https://www.worldlabs.ai/blog/taxonomy-of-world-models)" (World Labs, 3 June 2026)
-
----
-
-### Week 12 | F 11/20
-
-**Agents**
-
-Introduction to Agentic AI - Claude Code, Hermes. etc.
 
 ---
 
