@@ -52,7 +52,7 @@ See [[index#week-6--f-1009|Week 6]].
 
 ***
 
-### Week 9: Game Music
+### Week 9: Demoscenes
 
 ![](https://youtu.be/O2rlvAyj2PA)
 
