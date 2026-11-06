@@ -154,11 +154,12 @@ See [[w9-demoscene|W9 Demoscenes]].
 
 ### Week 10 | F 11/06
 
-**VRChat**
+**Platforms: VRChat**
 
 - Screening: [*We Met in Virtual Reality*](https://joeahunting.com/we-met-in-virtual-reality) (documentary, Joe Hunting, 2022)
 - [Hyperallergic article](https://hyperallergic.com/749447/we-met-in-virtual-reality-review/)
 - [Hunting interview](https://immerse.news/as-organic-as-a-real-camera-an-interview-with-joe-hunting-4fd4ea28845b)
+- Nick Montfort and Ian Bogost, "[Afterword on Platform Studies](pdf/afterword-platform-studies.pdf)," in *Racing The Beam: The Atari Video Computer System* (Cambridge, MA: MIT Press, 2009)
 
 See [[w10-vr-chat|W10 VR Chat]].
 
