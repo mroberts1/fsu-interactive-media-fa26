@@ -1,5 +1,5 @@
 ---
-title: "Special Interest Groups (SIG): Paper + presentations"
+title: "SIG groups"
 ---
 
 **Recommended Focus Topics**
@@ -16,3 +16,4 @@ title: "Special Interest Groups (SIG): Paper + presentations"
 - Modding
 - Alternate Reality Games (ARG)
 - Abort, Retry, Fail?
+- Generative Worlds 
