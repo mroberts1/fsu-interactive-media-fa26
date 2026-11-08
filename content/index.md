@@ -6,7 +6,7 @@ term: Fall 2026
 ---
 
 <style>
-.lain-ascii { container-type: inline-size; background: #000; line-height: 0; aspect-ratio: 630 / 389; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.lain-ascii { container-type: inline-size; background: #000; line-height: 0; aspect-ratio: 630 / 389; overflow: hidden; display: flex; align-items: center; justify-content: flex-start; }
 .lain-ascii img { width: 100%; height: auto; }
 .lain-ascii pre span { display: inline-block; width: 1ch; }
 .lain-ascii pre { flex: none; margin: 0; padding: 0; background: none; border: 0; font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: calc(100cqw / 72 * 1.15); line-height: 1.2; }
