@@ -94,7 +94,7 @@ This course examines the history and historiography of interactive media. Studen
 ## Films
 
 - [*LIFE 2.0*](https://drive.google.com/file/d/1yGMe4qI1jQ4aGn_5epNQsXPUYku-rC7A/view?usp=sharing) (Jason Spingarn-Koff, 2010)
-
+- [*Moleman 2 -- Demoscene -- The Art of the Algorithms*](https://youtu.be/iRkZcTg1JWU) (YouTube)
 ## Assignments & Evaluation
 
 - **Commentary** (Blackboard or Canvas, weekly, 10 required: 100-250-word response to reading/screening assignments): 30%
@@ -223,7 +223,7 @@ See [[w9-demoscene|W9 Demoscenes]].
 - Screening: [*We Met in Virtual Reality*](https://joeahunting.com/we-met-in-virtual-reality) (documentary, Joe Hunting, 2022)
 - [Hyperallergic article](https://hyperallergic.com/749447/we-met-in-virtual-reality-review/)
 - [Hunting interview](https://immerse.news/as-organic-as-a-real-camera-an-interview-with-joe-hunting-4fd4ea28845b)
-- Nick Montfort and Ian Bogost, "[Afterword on Platform Studies](pdf/afterword-platform-studies.pdf)," in *Racing The Beam: The Atari Video Computer System* (Cambridge, MA: MIT Press, 2009)
+- Nick Montfort and Ian Bogost, "[Afterword on Platform Studies](https://blackboard.fitchburgstate.edu/webapps/blackboard/execute/displayIndividualContent?course_id=_109741_1&content_id=_3855460_1)," in *Racing The Beam: The Atari Video Computer System* (Cambridge, MA: MIT Press, 2009)
 
 See [[w10-vr-chat|W10 VR Chat]].
 
