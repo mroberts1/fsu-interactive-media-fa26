@@ -22,7 +22,7 @@ See also:
 
 **Commodore 64**
 
-- Collins, Karen. “[‘Loops and Bloops’: Music of the Commodore 64 Games](pdf/karen-collins-commodore64.pdf)”
+- Collins, Karen. “[‘Loops and Bloops’: Music of the Commodore 64 Games](https://blackboard.fitchburgstate.edu/webapps/blackboard/execute/displayIndividualContent?course_id=_109741_1&content_id=_3855461_1) (Blackboard, login required)”
 - [C64 history](https://jahtari.org/archive/magazine/sid/c64-history.htm) (Jahtari site)
 - [Gamebase64](https://gb64.com/) (C64 games)
 - [Commodore 64](https://www.commodore.ca/) (portal)
