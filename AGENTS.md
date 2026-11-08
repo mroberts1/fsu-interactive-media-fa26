@@ -529,8 +529,8 @@ is which, so the gitignore rule is the single control.
 
 Rewriting the markdown rather than the pushed HTML is deliberate. One URL then
 serves both outputs: Blackboard students get the reading, and a visitor to the
-public Pages site gets Blackboard's login wall instead of a 404 or an exposed
-scan. The vault stays the single source of truth.
+public Pages site gets Blackboard's Error page (not a login prompt) instead of an
+exposed scan. Label such links "(Blackboard, login required)". The vault stays the single source of truth.
 
 The URL form is
 `/webapps/blackboard/execute/displayIndividualContent?course_id=<c>&content_id=<i>`.

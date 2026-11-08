@@ -4,7 +4,7 @@ instructor: Martin Roberts
 institution: Fitchburg State University
 term: Fall 2026
 ---
-
+Th
 <style>
 .lain-ascii { container-type: inline-size; background: #000; line-height: 0; aspect-ratio: 630 / 389; overflow: hidden; display: flex; align-items: center; justify-content: flex-start; }
 .lain-ascii img { width: 100%; height: auto; }
@@ -223,7 +223,7 @@ See [[w9-demoscene|W9 Demoscenes]].
 - Screening: [*We Met in Virtual Reality*](https://joeahunting.com/we-met-in-virtual-reality) (documentary, Joe Hunting, 2022)
 - [Hyperallergic article](https://hyperallergic.com/749447/we-met-in-virtual-reality-review/)
 - [Hunting interview](https://immerse.news/as-organic-as-a-real-camera-an-interview-with-joe-hunting-4fd4ea28845b)
-- Nick Montfort and Ian Bogost, "[Afterword on Platform Studies](https://blackboard.fitchburgstate.edu/webapps/blackboard/execute/displayIndividualContent?course_id=_109741_1&content_id=_3855460_1)," in *Racing The Beam: The Atari Video Computer System* (Cambridge, MA: MIT Press, 2009)
+- Nick Montfort and Ian Bogost, "[Afterword on Platform Studies](https://blackboard.fitchburgstate.edu/webapps/blackboard/execute/displayIndividualContent?course_id=_109741_1&content_id=_3855460_1) (Blackboard, login required)," in *Racing The Beam: The Atari Video Computer System* (Cambridge, MA: MIT Press, 2009)
 
 See [[w10-vr-chat|W10 VR Chat]].
 
