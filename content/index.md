@@ -5,7 +5,35 @@ institution: Fitchburg State University
 term: Fall 2026
 ---
 
-![[img/serial-experiments-lain-terminal.png]]
+<style>
+.lain-ascii { container-type: inline-size; background: #000; line-height: 0; aspect-ratio: 630 / 389; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.lain-ascii img { width: 100%; height: auto; }
+.lain-ascii pre { flex: none; margin: 0; padding: 0; background: none; border: 0; font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: calc(100cqw / 72 * 1.15); line-height: 1.2; }
+</style>
+<div id="lain-ascii" class="lain-ascii"><img src="img/serial-experiments-lain-terminal.png" alt="Serial Experiments Lain"></div>
+<script type="module">
+const COLS = 120, ROWS = 34;
+const render = async () => {
+  const el = document.getElementById("lain-ascii");
+  const img = el && el.querySelector("img");
+  if (!img || el.dataset.ascii) return;
+  el.dataset.ascii = "pending";
+  try {
+    const { default: Chafa } = await import(new URL("lib/chafa-wasm/chafa.js", document.baseURI).href);
+    const chafa = await Chafa();
+    const buf = await (await fetch(img.src)).arrayBuffer();
+    const { html } = await new Promise((ok, fail) =>
+      chafa.imageToHtml(buf, { symbols: "ascii", fgOnly: true, width: COLS, height: ROWS }, (e, d) => (e ? fail(e) : ok(d))));
+    el.innerHTML = `<pre role="img" aria-label="Serial Experiments Lain, rendered as ASCII">${html}</pre>`;
+    el.dataset.ascii = "done";
+  } catch (err) {
+    delete el.dataset.ascii;
+    console.warn("chafa-wasm render failed, keeping the original image", err);
+  }
+};
+render();
+document.addEventListener("nav", render);
+</script>
 
 <small>Image: [*Serial Experiments Lain*](https://en.wikipedia.org/wiki/Serial_Experiments_Lain) (1998) </small>
 
