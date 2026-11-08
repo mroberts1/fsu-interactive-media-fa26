@@ -426,6 +426,11 @@ def host_pdfs(cfg):
         for href in (re.findall(r"\]\(((?:\./)?pdf/[^)]+\.pdf)\)", text)
                      + re.findall(r"\]\(((?:\./|\.\./)*[^)/\s:]+\.zip)\)", text)):
             local = (f.parent / href).resolve()
+            # A page in a subfolder such as class-pages/ writes pdf/x.pdf, but
+            # the file lives in content/pdf/, not class-pages/pdf/. Without
+            # this fallback those links were silently skipped.
+            if not local.exists() and href.lstrip("./").startswith("pdf/"):
+                local = (VAULT / "content" / href.lstrip("./")).resolve()
             if local.exists() and not is_tracked(local):
                 wanted.setdefault(local.name, []).append((f, href))
                 paths[local.name] = local
