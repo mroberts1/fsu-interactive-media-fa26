@@ -8,11 +8,38 @@ term: Fall 2026
 <style>
 .lain-ascii { container-type: inline-size; background: #000; line-height: 0; aspect-ratio: 630 / 389; overflow: hidden; display: flex; align-items: center; justify-content: center; }
 .lain-ascii img { width: 100%; height: auto; }
+.lain-ascii pre span { display: inline-block; width: 1ch; }
 .lain-ascii pre { flex: none; margin: 0; padding: 0; background: none; border: 0; font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: calc(100cqw / 72 * 1.15); line-height: 1.2; }
 </style>
 <div id="lain-ascii" class="lain-ascii"><img src="img/serial-experiments-lain-terminal.png" alt="Serial Experiments Lain"></div>
 <script type="module">
 const COLS = 120, ROWS = 34;
+// Same styles as chafa-demo.sh. colors: 0 truecolor, 1 256, 3 16, 6 8, 4 black and white, 5 none.
+// dither: 1 ordered, 2 diffusion, 3 noise. colorSpace: 1 din99d.
+const STYLES = [
+  ["block+border+space", { symbols: "block+border+space" }],
+  ["ascii", { symbols: "ascii" }],
+  ["ascii, no color", { symbols: "ascii", colors: 5 }],
+  ["braille", { symbols: "braille" }],
+  ["braille, no color", { symbols: "braille", colors: 5 }],
+  ["sextant", { symbols: "sextant" }],
+  ["half", { symbols: "half" }],
+  ["solid", { symbols: "solid" }],
+  ["stipple", { symbols: "stipple" }],
+  ["hhalf+vhalf", { symbols: "hhalf+vhalf" }],
+  ["2 colors", { colors: 4 }],
+  ["8 colors", { colors: 6 }],
+  ["16 colors", { colors: 3 }],
+  ["256 colors", { colors: 1 }],
+  ["full color", { colors: 0 }],
+  ["block, 16 colors, ordered dither", { symbols: "block", colors: 3, dither: 1 }],
+  ["block, 16 colors, diffusion dither", { symbols: "block", colors: 3, dither: 2 }],
+  ["block, 16 colors, noise dither", { symbols: "block", colors: 3, dither: 3 }],
+  ["ascii, no color, ordered dither", { symbols: "ascii", colors: 5, dither: 1 }],
+  ["fg-only ascii", { symbols: "ascii", fgOnly: true }],
+  ["din99d color space", { colorSpace: 1 }],
+  ["preprocess off", { preprocess: false }],
+];
 const render = async () => {
   const el = document.getElementById("lain-ascii");
   const img = el && el.querySelector("img");
@@ -22,9 +49,18 @@ const render = async () => {
     const { default: Chafa } = await import(new URL("lib/chafa-wasm/chafa.js", document.baseURI).href);
     const chafa = await Chafa();
     const buf = await (await fetch(img.src)).arrayBuffer();
+    const asked = new URLSearchParams(location.search).get("style");
+    // First load of a browser session shows fg-only ascii; later loads are random.
+    let first = true;
+    try { first = !sessionStorage.getItem("lain-seen"); sessionStorage.setItem("lain-seen", "1"); } catch { first = false; }
+    const pick = STYLES[asked] ? Number(asked)
+      : first ? STYLES.findIndex(([n]) => n === "fg-only ascii")
+      : Math.floor(Math.random() * STYLES.length);
+    const [name, options] = STYLES[pick];
     const { html } = await new Promise((ok, fail) =>
-      chafa.imageToHtml(buf, { symbols: "ascii", fgOnly: true, width: COLS, height: ROWS }, (e, d) => (e ? fail(e) : ok(d))));
+      chafa.imageToHtml(buf, { width: COLS, height: ROWS, ...options }, (e, d) => (e ? fail(e) : ok(d))));
     el.innerHTML = `<pre role="img" aria-label="Serial Experiments Lain, rendered as ASCII">${html}</pre>`;
+    el.dataset.style = `${pick}: ${name}`;
     el.dataset.ascii = "done";
   } catch (err) {
     delete el.dataset.ascii;
