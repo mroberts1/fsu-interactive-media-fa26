@@ -5,9 +5,9 @@ title: "W8: Second Lives"
 
 - "[Double Agents](https://www.nytimes.com/slideshow/2007/06/15/magazine/20070617_AVATAR_SLIDESHOW_index.html)" (*New York Times*, 15 June 2007)
 - Thomas Malaby, *Making Virtual Worlds: Linden Labs and Second Life*:
-    - "[The Product: Second Life, Capital, and the Possibility of Failure in a Virtual World](https://blackboard.fitchburgstate.edu/webapps/blackboard/execute/displayIndividualContent?course_id=_109741_1&content_id=_3721775_1)" (ch. 1)
-    - "[Knowing the Gamer from the Game](https://blackboard.fitchburgstate.edu/webapps/blackboard/execute/displayIndividualContent?course_id=_109741_1&content_id=_3721776_1)" (ch. 3)
-    - "[References](https://blackboard.fitchburgstate.edu/webapps/blackboard/execute/displayIndividualContent?course_id=_109741_1&content_id=_3721769_1)"
+    - "[The Product: Second Life, Capital, and the Possibility of Failure in a Virtual World](https://blackboard.fitchburgstate.edu/webapps/blackboard/execute/displayIndividualContent?course_id=_109741_1&content_id=_3721775_1) (Blackboard, login required)" (ch. 1)
+    - "[Knowing the Gamer from the Game](https://blackboard.fitchburgstate.edu/webapps/blackboard/execute/displayIndividualContent?course_id=_109741_1&content_id=_3721776_1) (Blackboard, login required)" (ch. 3)
+    - "[References](https://blackboard.fitchburgstate.edu/webapps/blackboard/execute/displayIndividualContent?course_id=_109741_1&content_id=_3721769_1) (Blackboard, login required)"
 - [Second Life](https://www.secondlife.com/)
 - [*LIFE 2.0*](https://drive.google.com/file/d/1yGMe4qI1jQ4aGn_5epNQsXPUYku-rC7A/view?usp=sharing) (documentary about *Second Life*)
 
