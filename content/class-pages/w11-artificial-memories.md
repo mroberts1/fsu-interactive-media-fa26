@@ -1,6 +1,11 @@
 ---
 title: "W11: Artificial Memories"
 ---
+[![](memex.png)](https://blackboard.fitchburgstate.edu/webapps/blackboard/execute/displayIndividualContent?course_id=_109741_1&content_id=_3860385_1)
+
+*Vannevar Bush's Memex, described in "[As We May Think](https://blackboard.fitchburgstate.edu/webapps/blackboard/execute/displayIndividualContent?course_id=_109741_1&content_id=_3860385_1)" (1945)*
+
+***
 ### The Magical Place of Literary Memory™: Xanadu
 
 -- Belinda Barnet
