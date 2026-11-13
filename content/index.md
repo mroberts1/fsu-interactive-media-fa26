@@ -236,7 +236,7 @@ See [[w10-vr-chat|W10 VR Chat]].
 - Belinda Barnet, "[The Magical Place of Literary Memory™: Xanadu](w11-artificial-memories.md)" ([*Screening the Past*, 18](The Magical Place of Literary Memory™:  Xanadu) (30 December 2014))
 - Vannevar Bush, "[As We May Think](https://www.math.cmu.edu/~af1p/Teaching/INFONET/Papers/AsWeMayThink/bush.html)" (*Atlantic Monthly*, July 1945) \[[pdf](https://blackboard.fitchburgstate.edu/webapps/blackboard/execute/displayIndividualContent?course_id=_109741_1&content_id=_3860385_1)\]
 - [Obsidian](https://obsidian.md/)
-2
+
 ---
 
 ### Week 12 | F 11/20
