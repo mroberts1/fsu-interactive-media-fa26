@@ -4,7 +4,7 @@ description: "Six Propositions"
 toc: false
 ---
 
-[![](img/image14.jpg)](https://www.nytimes.com/slideshow/2007/06/15/magazine/20070617_AVATAR_SLIDESHOW_index.html)
+[![](agendas-wi26/img/image14.jpg)](https://www.nytimes.com/slideshow/2007/06/15/magazine/20070617_AVATAR_SLIDESHOW_index.html)
 
 <div class="thumb-gallery">
 <img src="img/image7.jpg" alt="" width="50" />

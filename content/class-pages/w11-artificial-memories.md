@@ -1,6 +1,7 @@
 ---
-title: "The Magical Place of Literary Memory™: Xanadu"
+title: "W11: Artificial Memories"
 ---
+### The Magical Place of Literary Memory™: Xanadu
 
 -- Belinda Barnet
 

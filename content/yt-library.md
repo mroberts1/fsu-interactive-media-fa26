@@ -62,7 +62,7 @@ See [[index#week-6--f-1009|Week 6]].
 
 ***
 
-### Week 11: Cool Memories
+### Week 11: Artificial Memories
 
 ![](https://youtu.be/HVjIewh245A)
 
