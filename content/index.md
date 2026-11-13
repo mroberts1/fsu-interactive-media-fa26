@@ -231,9 +231,18 @@ See [[w10-vr-chat|W10 VR Chat]].
 
 ### Week 11 | F 11/13
 
+**Cool Memories**
+
+- Belinda Barnet, "[The Magical Place of Literary Memory™: Xanadu](xanadu.md)" ([*Screening the Past*, 18](The Magical Place of Literary Memory™:  Xanadu) (30 December 2014))
+- Vannevar Bush, "[As We May Think](https://www.math.cmu.edu/~af1p/Teaching/INFONET/Papers/AsWeMayThink/bush.html)" (*Atlantic Monthly*, July 1945) \[[pdf](https://blackboard.fitchburgstate.edu/webapps/blackboard/execute/displayIndividualContent?course_id=_109741_1&content_id=_3860385_1)\]
+
+---
+
+### Week 12 | F 11/20
+
 **Psychogeography**
 
-[Videos: *Cyberpunk 2077* (2)](yt-library#week-11-psychogeography)
+[Videos: *Cyberpunk 2077* (2)](yt-library#week-12-psychogeography)
 
 - Stephen Johnson, "[Watch how video games are approaching perfect photorealism](https://www.freethink.com/hard-tech/unreal-engine-5-photorealism)" (*Freethink*, 30 September 2023)
 - "[The Truth About the Modded *Cyberpunk 2077* Hyperrealism Fad](https://medium.com/@moddedgames/the-truth-about-the-cyberpunk-2077-hyperrealism-fad-b6efda43276c)" (*Medium*, 19 April 2024)
@@ -242,16 +251,6 @@ See [[w10-vr-chat|W10 VR Chat]].
 - [*Cyberpunk 2077*](https://www.nexusmods.com/games/cyberpunk2077) (*Nexus Mods*)
 - [*Cyberpunk 2077* YouTube playlist](https://youtube.com/playlist?list=PLKJL7wxYKW3MbT-x6mf5Yln8a7LUnS4jm&si=S5dfWP2b7tEXOTu6)
 - inZOI
-
----
-
-### Week 12 | F 11/20
-
-**Generative Worlds**
-
-- Fei Fei Li, "[From Words to Worlds: Spatial Intelligence is AI’s Next Frontier](https://drfeifei.substack.com/p/from-words-to-worlds-spatial-intelligence)" (World Labs, 10 November 2025)
-- "[Marble: A Multimodal World Model](https://www.worldlabs.ai/blog/marble-world-model)" (World Labs, 12 November 2025)
-- "[3D As Code](https://www.worldlabs.ai/blog/3d-as-code)" (World Labs, 3 March 2026)
 
 ---
 
@@ -278,6 +277,8 @@ M 12/14 Reading Day
 T 12/15-21 Exam period (T 12/22 snow day)
 
 ## Bibliography
+
+- Belinda Barnet, *Memory Machines: The Evolution of Hypertext*. London and New York: Anthem Press, 2013.
 
 - Ian Bogost and Nick Montfort. *Racing the Beam: The Atari Video Computer System*. MIT Press, 2009.
 

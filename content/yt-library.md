@@ -62,12 +62,17 @@ See [[index#week-6--f-1009|Week 6]].
 
 ***
 
-### Week 11: Psychogeography
+### Week 11: Cool Memories
+
+![](https://youtu.be/HVjIewh245A)
+
+***
+### Week 12: Psychogeography
 
 **Hyperrealism vs. Playability**
 
 *Cyberpunk 2077* as ambience and as a modding platform. See
-[[index#week-11--f-1113|Week 11]].
+[[index#week-12--f-1120|Week 12]].
 
 ![](https://www.youtube.com/watch?v=a15V87a_s2U)
 

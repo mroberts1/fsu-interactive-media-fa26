@@ -1,5 +1,5 @@
 ---
-title: "SIG groups"
+title: "Special Interest Groups"
 ---
 
 **Recommended Focus Topics**
