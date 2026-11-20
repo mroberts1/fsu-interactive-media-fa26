@@ -4,7 +4,7 @@ instructor: Martin Roberts
 institution: Fitchburg State University
 term: Fall 2026
 ---
-Th
+
 <style>
 .lain-ascii { container-type: inline-size; background: #000; line-height: 0; aspect-ratio: 630 / 389; overflow: hidden; display: flex; align-items: center; justify-content: flex-start; }
 .lain-ascii img { width: 100%; height: auto; }
