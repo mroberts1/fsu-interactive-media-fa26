@@ -65,19 +65,3 @@ See [[index#week-6--f-1009|Week 6]].
 ### Week 11: Artificial Memories
 
 ![](https://youtu.be/HVjIewh245A)
-
-***
-### Week 12: Psychogeography
-
-**Hyperrealism vs. Playability**
-
-*Cyberpunk 2077* as ambience and as a modding platform. See
-[[index#week-12--f-1120|Week 12]].
-
-![](https://www.youtube.com/watch?v=a15V87a_s2U)
-
-"Cyberpunk Night City Ambience: Outside V's Apartment" (Baku City Ambience)
-
-![](https://www.youtube.com/watch?v=xEChtsKTA2A)
-
-"Basic Modding Guide for Cyberpunk 2077" (Krush SG)
