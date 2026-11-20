@@ -241,17 +241,11 @@ See [[w10-vr-chat|W10 VR Chat]].
 
 ### Week 12 | F 11/20
 
-**Psychogeography**
+**Beyond the Magic Circle**
 
-[Videos: *Cyberpunk 2077* (2)](yt-library#week-12-psychogeography)
+- Mia Consalvo, "[Introduction: To Cheat or Not to Cheat: Is That Even the Question?](https://blackboard.fitchburgstate.edu/webapps/blackboard/execute/displayIndividualContent?course_id=_109741_1&content_id=_3865005_1) (Blackboard, login required)," in *Cheating: Gaining Advantage in Videogames* (Cambridge, MA: MIT Press, 2007)
 
-- Stephen Johnson, "[Watch how video games are approaching perfect photorealism](https://www.freethink.com/hard-tech/unreal-engine-5-photorealism)" (*Freethink*, 30 September 2023)
-- "[The Truth About the Modded *Cyberpunk 2077* Hyperrealism Fad](https://medium.com/@moddedgames/the-truth-about-the-cyberpunk-2077-hyperrealism-fad-b6efda43276c)" (*Medium*, 19 April 2024)
-- "[The Ultimate Cyberpunk 2077 PC Modding Guide: Looks, Performance & Customization](https://medium.com/@moddedgames/the-ultimate-cyberpunk-2077-pc-modding-guide-looks-performance-customization-bf21e6ea8581)" (*Medium*, 19 April 2024)
-- Alexandra Sakellariou, "[RDR2 Prioritizes Realism At The Expense of Playability](https://screenrant.com/red-dead-redemption-2-realism-extreme-boring-controls/)" (*Screen Rant*, 7 September 2020)
-- [*Cyberpunk 2077*](https://www.nexusmods.com/games/cyberpunk2077) (*Nexus Mods*)
-- [*Cyberpunk 2077* YouTube playlist](https://youtube.com/playlist?list=PLKJL7wxYKW3MbT-x6mf5Yln8a7LUnS4jm&si=S5dfWP2b7tEXOTu6)
-- inZOI
+See [[w12-beyond-the-magic-circle|W12 Beyond the Magic Circle]].
 
 ---
 

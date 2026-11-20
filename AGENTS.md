@@ -434,6 +434,12 @@ course menu, so creating one with `POST /courses/<id>/contents` (no parent) is
 how a menu section is made; it lands at the bottom until given a `position`.
 The folder's own availability is a separate gate from its documents'.
 
+The two SIG assignment pages push to a third top-level folder, `Special
+Interest Groups` (`_3864993_1`), listed under `sigs` and `sigs_folder_id`.
+`script/blackboard folder --title "<name>"` creates a visible top-level folder
+and prints its id; wiring a new group into `main()` is one `groups.append`.
+`status` does not list this folder.
+
 Relative links are resolved against each page's own URL, not the site root,
 so `./w3-hyperfiction` on an agenda page points at `class-pages/w3-hyperfiction`.
 
