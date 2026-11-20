@@ -473,6 +473,25 @@ def host_pdfs(cfg):
                 print(f"relinked        {name} in {f.relative_to(VAULT)}")
 
 
+def make_folder(cfg, token, title):
+    """Create a visible top-level folder, which Blackboard shows in the course
+    menu. Returns its id for blackboard.json. Run once per folder."""
+    js = f"""
+(async () => {{
+  const r = await fetch({json.dumps(cfg['base_url'] + API)} + '/courses/{cfg["course_id"]}/contents',
+    {{method:'POST', credentials:'same-origin',
+      headers:{{'Content-Type':'application/json','Accept':'application/json',
+               'X-Blackboard-XSRF':{json.dumps(token)}}},
+      body:JSON.stringify({{title:{json.dumps(title)}, availability:{{available:'Yes'}},
+                           contentHandler:{{id:'resource/x-bb-folder'}}}})}});
+  const t = await r.text();
+  let id = null; try {{ id = JSON.parse(t).id; }} catch(e) {{}}
+  return JSON.stringify({{status:r.status, id:id, err: r.ok ? null : t.slice(0,200)}});
+}})()
+"""
+    return browser_eval(js)
+
+
 def status(cfg):
     """Report what students actually see, without trusting the Blackboard UI.
 
@@ -563,13 +582,14 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("target", nargs="?", default="pages",
-                    choices=["pages", "link", "all", "files", "status", "delete"])
+                    choices=["pages", "link", "all", "files", "status", "delete", "folder"])
     ap.add_argument("--print", action="store_true", dest="only_print",
                     help="write the HTML locally and push nothing")
     ap.add_argument("--hidden", action="store_true",
                     help="push the documents unavailable to students")
     ap.add_argument("--ids", nargs="+", metavar="ID",
                     help="content ids for `delete`, from the folder listing")
+    ap.add_argument("--title", help="folder title for `folder`")
     args = ap.parse_args()
 
     if not CONFIG.exists():
@@ -595,12 +615,24 @@ def main():
                 print(f"FAILED  {r['id']}  HTTP {r['status']}")
         return
 
+    if args.target == "folder":
+        if not args.title:
+            sys.exit("folder needs --title")
+        goto_api(cfg)
+        r = make_folder(cfg, xsrf(), args.title)
+        if r["status"] not in (200, 201):
+            sys.exit(f"HTTP {r['status']} {r.get('err')}")
+        print(f"created folder {args.title!r}: {r['id']}")
+        return
+
     out = build_site()
     # Each group is a folder and the pages that go in it, in order. Agendas
     # get their own top-level folder, which Blackboard shows in the course menu.
     groups = [(cfg["folder_id"], cfg["pages"])]
     if cfg.get("agendas"):
         groups.append((cfg["agendas_folder_id"], cfg["agendas"]))
+    if cfg.get("sigs"):
+        groups.append((cfg["sigs_folder_id"], cfg["sigs"]))
 
     rendered = {}
     for _, pages in groups:
