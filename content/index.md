@@ -115,7 +115,7 @@ This course examines the history and historiography of interactive media. Studen
 
 Sandy Stone, "Sex, Death, and Machinery" (in *The War of Desire and Technology at the Close of the Mechanical Age*)
 
-See [[w1-intro|W1 Introduction]].
+See [[w1-intro|W1: Introduction]].
 
 ---
 
@@ -126,6 +126,8 @@ See [[w1-intro|W1 Introduction]].
 - Nick Montfort, "[Adventure and Its Ancestors](pdf/nick-montfort-adventure.pdf)" (*Twisty Little Passages*, ch. 3)
 - Lebling, P. David, Marc S. Blank, and Timothy A. Anderson, "[Zork: A Computerized Fantasy Simulation Game](https://mud.co.uk/richard/zork.htm)" (*IEEE Computer*, April 1979, pp. 51-59)
 
+See [[w2-caves-mazes|W2: Cavees & Mazes]]
+
 ---
 
 ### Week 3 | F 09/18
@@ -133,6 +135,8 @@ See [[w1-intro|W1 Introduction]].
 **Hyperfiction**
 
 - Nick Montfort, "[Zork and other Mainframe Works](pdf/nick-montfort-zork.pdf)" (*Twisty Little Passages*, ch. 4)
+
+See [[w3-hyperfiction|W3: Hyperfiction]]
 
 ---
 
@@ -142,6 +146,8 @@ See [[w1-intro|W1 Introduction]].
 
 - Sarah Ciston et al., "[Please Go On: An Introduction](pdf/eliza-intro.pdf)", in [*Inventing ELIZA: How The First Chatbot Shaped the Future of AI*](https://direct.mit.edu/books/oa-monograph/6171/Inventing-ELIZAHow-the-First-Chatbot-Shaped-the).
 - [Loebner Prize](https://en.wikipedia.org/wiki/Loebner_Prize)
+
+See [[w4-turing-test|W4: Turing Test]]
 
 ---
 
@@ -156,6 +162,8 @@ See [[w1-intro|W1 Introduction]].
 - Martin Roberts et al., [*Democracy in Cyberspace*](https://mroberts1.github.io/commforum/). MIT Communications Forum, 1994.
 - [How to log on to LambdaMOO](https://faculty.cc.gatech.edu/~asb/teaching/oc/19/lambda.html)
 
+See [[w5-habitat|W5: Habitat]]
+
 ---
 
 ### Week 6 | F 10/09
@@ -168,6 +176,8 @@ See [[w6-myst|W6 Myst]].
 
 - [Myst](https://cyan.com/games/myst/)
 - [Play online](https://mystonline.com/en/)
+
+See [[w6-myst|W6: Myst]]
 
 ---
 
@@ -182,6 +192,8 @@ See [[w6-myst|W6 Myst]].
 - [Gryphel Project](https://www.gryphel.com/index.html) (Paul C. Pratt, 2019)
 - [E-Maculation wiki](https://www.emaculation.com/doku.php)
 
+See [[w7-hyperjam|W7: Hyperjam]]
+
 ---
 
 ### Week 8 | F 10/23
@@ -195,6 +207,8 @@ See [[w6-myst|W6 Myst]].
     - "[References](https://blackboard.fitchburgstate.edu/webapps/blackboard/execute/displayIndividualContent?course_id=_109741_1&content_id=_3721769_1) (Blackboard, login required)"
 - [Second Life](https://www.secondlife.com/) (try setting up an account!)
 - [*LIFE 2.0*](https://drive.google.com/file/d/1yGMe4qI1jQ4aGn_5epNQsXPUYku-rC7A/view?usp=sharing) (documentary about *Second Life*)
+
+See [[w8-second-lives|W8: Second Lives]]
 
 ---
 
@@ -212,7 +226,7 @@ See [[w6-myst|W6 Myst]].
 - [cTrix modules](https://modarchive.org/index.php?request=view_artist_modules&query=80387)
 - [*Moleman 2 -- Demoscene -- The Art of the Algorithms*](https://youtu.be/iRkZcTg1JWU) (YouTube)
 
-See [[w9-demoscene|W9 Demoscenes]].
+See [[w9-demoscene|W9: Demoscenes]].
 
 ---
 
@@ -237,13 +251,15 @@ See [[w10-vr-chat|W10 VR Chat]].
 - Vannevar Bush, "[As We May Think](https://www.math.cmu.edu/~af1p/Teaching/INFONET/Papers/AsWeMayThink/bush.html)" (*Atlantic Monthly*, July 1945) \[[pdf](https://blackboard.fitchburgstate.edu/webapps/blackboard/execute/displayIndividualContent?course_id=_109741_1&content_id=_3860385_1)\]
 - [Obsidian](https://obsidian.md/)
 
+See [[w11-artificial-memories|W11 Artificial Memories]]
+
 ---
 
 ### Week 12 | F 11/20
 
 **Cheatcode**
 
-- Mia Consalvo, "[Introduction: To Cheat or Not to Cheat: Is That Even the Question?](https://blackboard.fitchburgstate.edu/webapps/blackboard/execute/displayIndividualContent?course_id=_109741_1&content_id=_3865005_1) (Blackboard, login required)," in *Cheating: Gaining Advantage in Videogames* (Cambridge, MA: MIT Press, 2007)
+- Mia Consalvo, "[Introduction: To Cheat or Not to Cheat: Is That Even the Question?](https://blackboard.fitchburgstate.edu/webapps/blackboard/execute/displayIndividualContent?course_id=_109741_1&content_id=_3865005_1) (Blackboard, login required)," in [*Cheating: Gaining Advantage in Videogames*](https://mitpress.mit.edu/9780262513289/cheating/) (Cambridge, MA: MIT Press, 2007)
 
 See [[w12-cheatcode|W12 Cheatcode]].
 

@@ -65,3 +65,16 @@ See [[index#week-6--f-1009|Week 6]].
 ### Week 11: Artificial Memories
 
 ![](https://youtu.be/HVjIewh245A)
+
+***
+
+### Week 12: Chinese Gold Farmers
+
+
+![](https://youtu.be/q3cmCKjPLR8)
+
+![](https://youtu.be/3rezLLMhwSM)
+
+![](https://youtu.be/kCXZNA74iIo)
+
+***
